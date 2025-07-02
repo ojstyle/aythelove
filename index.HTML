@@ -1,177 +1,212 @@
+<!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>안양역세권지구 분담금 계산기</title>
-    <style>
-        body {
-            font-family: 'Malgun Gothic', sans-serif;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
-        .container {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            padding: 30px;
-            margin-bottom: 20px;
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 30px;
-            font-size: 2.2em;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-        }
-        .input-section {
-            background: #f8f9fa;
-            padding: 25px;
-            border-radius: 10px;
-            margin-bottom: 25px;
-            border-left: 5px solid #667eea;
-        }
-        .input-group {
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #555;
-            font-size: 1.1em;
-        }
-        input, select {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: border-color 0.3s ease;
-        }
-        input:focus, select:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-        .highlight-box {
-            background: #fff3cd;
-            padding: 20px;
-            border-left: 5px solid #ffc107;
-            border-radius: 10px;
-            margin-top: 20px;
-        }
-        .highlight-box h4 {
-            margin-top: 0;
-            color: #856404;
-        }
-        .highlight-box .amount {
-            font-size: 1.8em;
-            font-weight: bold;
-            color: #dc3545;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>안양역세권지구 분담금 계산기</title>
+  <style>
+    body {
+      font-family: 'Malgun Gothic', sans-serif;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+    }
+
+    .container {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 30px;
+      font-size: 2.2em;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .input-section {
+      background: #f8f9fa;
+      padding: 25px;
+      border-radius: 10px;
+      margin-bottom: 25px;
+      border-left: 5px solid #667eea;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #555;
+      font-size: 1.1em;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: border-color 0.3s ease;
+    }
+
+    input:focus,
+    select:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .highlight-box {
+      background: #fff3cd;
+      padding: 20px;
+      border-left: 5px solid #ffc107;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    .highlight-box h4 {
+      margin-top: 0;
+      color: #856404;
+    }
+
+    .highlight-box .amount {
+      font-size: 1.8em;
+      font-weight: bold;
+      color: #dc3545;
+    }
+
+    .warning {
+      background: #f8d7da;
+      color: #721c24;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 20px;
+      border-left: 5px solid #dc3545;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🏢 안양역세권지구 분담금 계산기 🏢</h1>
+  <div class="container">
+    <h1>🏢 안양역세권지구 분담금 계산기 🏢</h1>
 
-        <div class="input-section">
-            <h3>📝 기본 정보 입력</h3>
-            <div class="input-group">
-                <label for="assetValue">내 권리가액 (원):</label>
-                <input type="number" id="assetValue" placeholder="예: 150000000" min="0">
-                <div id="assetValueFormatted" style="margin-top: 5px; color: #666; font-size: 0.9em;"></div>
-            </div>
+    <div class="input-section">
+      <h3>📝 기본 정보 입력</h3>
 
-            <div class="input-group">
-    <label for="salePrice">분양가 입력 (원) <span style="color: #999; font-size: 0.9em;">예: 658,200,000원 (84㎡ 기준 예시)</span></label>
-    <input type="number" id="salePrice" placeholder="예: 658200000" min="0">
-</div>
-        </div>
+      <div class="input-group">
+        <label for="assetValue">내 권리가액 (원):</label>
+        <input type="number" id="assetValue" placeholder="예: 150000000" min="0" />
+        <div id="assetValueFormatted" style="margin-top: 5px; color: #666; font-size: 0.9em;"></div>
+      </div>
 
-        <div class="calculation-section">
-            <h3>📊 분담금 계산 결과</h3>
-            <div id="results"></div>
-        </div>
+      <div class="input-group">
+        <label for="apartmentType">평형 선택:</label>
+        <select id="apartmentType">
+          <option value="">평형을 선택하세요</option>
+          <option value="59">59㎡ - 예: 507,300,000원</option>
+          <option value="72">72㎡ - 예: 587,300,000원</option>
+          <option value="84">84㎡ - 예: 658,200,000원</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label for="salePrice">분양가 입력 (원) <span style="color: #999; font-size: 0.9em;">(직접 입력 시 위 선택 무시됨)</span></label>
+        <input type="number" id="salePrice" placeholder="예: 658200000" min="0" />
+      </div>
     </div>
 
-    <script>
-        const data2021 = {
-            ratio: 109.34,
-            prices: {
-                59: 398900000,
-                72: 459200000,
-                84: 518050000
-            }
-        };
+    <div class="calculation-section">
+      <h3>📊 분담금 계산 결과</h3>
+      <div id="results"></div>
+    </div>
+  </div>
 
-        const data2025 = {
-            ratio: 100,
-            prices: {
-                59: 507300000,
-                72: 587300000,
-                84: 658200000
-            }
-        };
+  <script>
+    const data2021 = {
+      ratio: 109.34,
+      prices: {
+        59: 398900000,
+        72: 459200000,
+        84: 518050000,
+      },
+    };
 
-        function formatNumber(num) {
-            return new Intl.NumberFormat('ko-KR').format(Math.round(num));
-        }
+    const data2025 = {
+      ratio: 100,
+      prices: {
+        59: 507300000,
+        72: 587300000,
+        84: 658200000,
+      },
+    };
 
-        function formatCurrency(num) {
-            return formatNumber(num) + '원';
-        }
+    function formatNumber(num) {
+      return new Intl.NumberFormat('ko-KR').format(Math.round(num));
+    }
 
-        function calculateBundam(salePrice, ratio, assetValue) {
-            const rightValue = assetValue * (ratio / 100);
-            const bundam = salePrice - rightValue;
-            return {
-                rightValue: rightValue,
-                bundam: bundam
-            };
-        }
+    function formatCurrency(num) {
+      return formatNumber(num) + '원';
+    }
 
-        function calculate() {
-            const assetValue = parseFloat(document.getElementById('assetValue').value);
-            const apartmentType = document.getElementById('apartmentType').value;
+    function calculateBundam(salePrice, ratio, assetValue) {
+      const rightValue = assetValue * (ratio / 100);
+      const bundam = salePrice - rightValue;
+      return {
+        rightValue: rightValue,
+        bundam: bundam,
+      };
+    }
 
-            if (!assetValue || !apartmentType || isNaN(parseFloat(document.getElementById('salePrice').value))) {
-                document.getElementById('results').innerHTML = '<div class="warning">⚠️ 종전자산평가총액과 평형을 모두 입력해주세요.</div>';
-                return;
-            }
+    function calculate() {
+      const assetValue = parseFloat(document.getElementById('assetValue').value);
+      const apartmentType = document.getElementById('apartmentType').value;
+      const inputSalePrice = parseFloat(document.getElementById('salePrice').value);
 
-            const salePrice2021 = data2021.prices[apartmentType];
-const inputSalePrice = parseFloat(document.getElementById('salePrice').value);
-const salePrice2025 = inputSalePrice || data2025.prices[apartmentType];
+      if (!assetValue || !apartmentType || isNaN(inputSalePrice)) {
+        document.getElementById('results').innerHTML =
+          '<div class="warning">⚠️ 권리가액, 평형, 분양가를 모두 입력해주세요.</div>';
+        return;
+      }
 
-            const result2021 = calculateBundam(salePrice2021, data2021.ratio, assetValue);
-            const result2025_100 = calculateBundam(salePrice2025, 100, assetValue);
-            const additionalBundam_100 = result2025_100.bundam - result2021.bundam;
+      const salePrice2021 = data2021.prices[apartmentType];
+      const salePrice2025 = inputSalePrice || data2025.prices[apartmentType];
 
-            let html = `
-                <div class="highlight-box">
-                    <h4>📌 분담금 비교</h4>
-                    <p><strong>2021년 기준 분담금:</strong> ${formatCurrency(result2021.bundam)}</p>
-                    <p><strong>2025년 조합안 분담금:</strong> ${formatCurrency(result2025_100.bundam)}</p>
-                    <p><strong>증가한 추가 분담금:</strong> <span class="amount">${formatCurrency(additionalBundam_100)}</span></p>
-                    <p>⚠️ 권리가액이 낮을수록 추가 부담이 더 큽니다. 이는 상대적으로 자산 규모가 작은 조합원이 더 큰 분담금을 부담하게 되는 구조로, 형평성 문제가 발생할 수 있습니다.</p>
-                </div>
-            `;
+      const result2021 = calculateBundam(salePrice2021, data2021.ratio, assetValue);
+      const result2025_100 = calculateBundam(salePrice2025, 100, assetValue);
+      const additionalBundam_100 = result2025_100.bundam - result2021.bundam;
 
-            document.getElementById('results').innerHTML = html;
-        }
+      let html = `
+        <div class="highlight-box">
+          <h4>📌 분담금 비교</h4>
+          <p><strong>2021년 기준 분담금:</strong> ${formatCurrency(result2021.bundam)}</p>
+          <p><strong>2025년 조합안 분담금:</strong> ${formatCurrency(result2025_100.bundam)}</p>
+          <p><strong>증가한 추가 분담금:</strong> <span class="amount">${formatCurrency(additionalBundam_100)}</span></p>
+          <p>⚠️ 권리가액이 낮을수록 추가 부담이 더 큽니다. 이는 상대적으로 자산 규모가 작은 조합원이 더 큰 분담금을 부담하게 되는 구조로, 형평성 문제가 발생할 수 있습니다.</p>
+        </div>
+      `;
 
-        document.getElementById('assetValue').addEventListener('input', function () {
-            const val = parseFloat(this.value);
-            const formatted = isNaN(val) ? '' : formatCurrency(val);
-            document.getElementById('assetValueFormatted').innerText = formatted;
-            calculate();
-        });
+      document.getElementById('results').innerHTML = html;
+    }
 
-        document.getElementById('apartmentType').addEventListener('change', calculate);
-    </script>
+    document.getElementById('assetValue').addEventListener('input', function () {
+      const val = parseFloat(this.value);
+      const formatted = isNaN(val) ? '' : formatCurrency(val);
+      document.getElementById('assetValueFormatted').innerText = formatted;
+      calculate();
+    });
+
+    document.getElementById('apartmentType').addEventListener('change', calculate);
+    document.getElementById('salePrice').addEventListener('input', calculate);
+  </script>
 </body>
 </html>
