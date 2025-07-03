@@ -15,200 +15,244 @@
             --border-color: #537895;
             --success-color: #28a745;
             --warning-color: #ffc107;
+            --risk-color: #dc3545;
+            --risk-bg-color: rgba(220, 53, 69, 0.1);
+            --alt-color: #17a2b8;
         }
-
+        * { box-sizing: border-box; }
         body {
-            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
-            max-width: 1200px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 15px;
             background-color: var(--bg-color);
             color: var(--text-color);
-            min-height: 100vh;
         }
-        
         .container {
             background: var(--container-bg);
             border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-            padding: 30px;
-            margin-bottom: 20px;
-            border: 1px solid var(--primary-color);
+            padding: 20px;
         }
-        
-        h1, h3, h4, h5 {
-            color: var(--text-color);
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 2.2em;
-            color: var(--secondary-color);
-        }
-        
+        h1 { text-align: center; color: var(--secondary-color); margin-bottom: 25px; }
+        h3, h4 { margin-top: 0; margin-bottom: 20px; }
         .input-section, .calculation-section {
-            background: rgba(15, 52, 96, 0.5);
-            padding: 25px;
+            background: rgba(15, 52, 96, 0.2);
+            padding: 20px;
             border-radius: 10px;
             margin-bottom: 25px;
-            border-left: 5px solid var(--secondary-color);
         }
-        
-        .input-group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 8px; font-weight: bold; font-size: 1.1em; }
+        .input-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; }
         input, select {
             width: 100%;
             padding: 12px;
-            border: 2px solid var(--border-color);
+            border: 1px solid var(--border-color);
             border-radius: 8px;
             font-size: 16px;
             background-color: var(--input-bg);
             color: var(--text-color);
-            transition: border-color 0.3s ease;
         }
-        input:focus, select:focus {
-            outline: none;
-            border-color: var(--secondary-color);
-            box-shadow: 0 0 0 3px rgba(233, 69, 96, 0.3);
+        .korean-currency { font-size: 0.9em; color: #a0a0a0; text-align: right; height: 1em; margin-top: 4px; }
+        
+        /* --- 결과 섹션 --- */
+        .summary-section {
+            background-color: var(--primary-color);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 25px;
         }
-        .korean-currency { font-size: 0.9em; color: #a0a0a0; text-align: right; height: 1.2em; margin-top: 4px; }
+        .summary-item { margin-bottom: 15px; }
+        .summary-item:last-child { margin-bottom: 0; }
+        .summary-label { font-size: 1.1em; }
+        .summary-value { font-size: 2em; font-weight: bold; color: var(--warning-color); }
+        .summary-value.rate { color: var(--secondary-color); }
 
-        .intuitive-comparison { display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap; margin-bottom: 20px; }
-        .comparison-card { background: var(--primary-color); padding: 25px; border-radius: 15px; text-align: center; flex: 1; min-width: 300px; box-shadow: 0 10px 20px rgba(0,0,0,0.3); border-left: 7px solid; }
+        .comparison-container {
+            display: flex;
+            gap: 20px;
+        }
+        .comparison-card {
+            flex: 1;
+            background-color: var(--primary-color);
+            border-radius: 10px;
+            padding: 20px;
+            border-bottom: 5px solid;
+        }
         .comparison-card.old { border-color: var(--success-color); }
         .comparison-card.new { border-color: var(--secondary-color); }
-        .comparison-card h5 { margin-top: 0; font-size: 1.2em; }
-        .comparison-card .amount { font-size: 2.2em; font-weight: bold; margin: 10px 0; color: white; }
-        .comparison-card .details { font-size: 0.9em; color: #b0b0b0; }
-        .arrow { font-size: 2.5em; color: var(--secondary-color); }
-        .additional-burden-box { background: #4a4029; padding: 20px; border-radius: 15px; text-align: center; border-left: 7px solid var(--warning-color); margin-top: 10px; }
-        .additional-burden-box .amount { color: var(--warning-color); font-size: 2.5em; font-weight: bold; }
-        .additional-burden-box .increase-rate { font-size: 1.1em; color: #e0e0e0; }
+        .comparison-card h5 { margin-top: 0; font-size: 1.2em; text-align: center; }
+        .detail-item { 
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .detail-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+        .detail-item .label { font-size: 0.9em; color: #a0a0a0; }
+        .detail-item .value { font-size: 1.2em; font-weight: bold; }
+        .detail-item .value.final-bundam { 
+            font-size: 1.5em; 
+            color: var(--warning-color);
+        }
+        .detail-item .value.sale-price {
+            color: var(--alt-color);
+        }
 
-        .burden-range-visualization, .detailed-table-section { background: var(--primary-color); padding: 25px; border-radius: 10px; margin-top: 25px; border-left: 5px solid #17a2b8; }
-        .burden-range-visualization h4, .detailed-table-section h4 { text-align: center; margin-top: 0; }
-        .burden-bar-container { width: 100%; height: 30px; background: linear-gradient(to right, var(--success-color), var(--warning-color), var(--secondary-color)); border-radius: 15px; margin-top: 15px; position: relative; border: 1px solid var(--border-color); }
-        .burden-marker { position: absolute; width: 5px; height: 100%; background-color: white; box-shadow: 0 0 10px white; transform: translateX(-50%); top: 0; }
-        .burden-bar-labels { display: flex; justify-content: space-between; font-size: 0.9em; padding: 5px 0; }
-        .burden-bar-labels span { font-weight: bold; }
-        .burden-summary { text-align:center; margin-top:15px; }
-        .burden-summary strong { color: var(--secondary-color); }
+        .analysis-section {
+            background-color: var(--primary-color);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 25px;
+        }
+        .analysis-section h4 { text-align: center; }
 
-        .result-table-wrapper { overflow-x: auto; }
-        .result-table { width: 100%; border-collapse: collapse; margin-top: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-        .result-table th, .result-table td { padding: 10px; text-align: center; border: 1px solid var(--border-color); font-size: 0.85em; white-space: nowrap; }
-        .result-table th { color: white; font-weight: bold; }
-        .result-table .header-2021 { background: linear-gradient(135deg, #1e6b34, #28a745); }
-        .result-table .header-2025 { background: linear-gradient(135deg, #b82a3f, #e94560); }
-        .result-table .header-alt { background: linear-gradient(135deg, #12586e, #17a2b8); }
-        .result-table tbody tr { background-color: var(--input-bg); transition: background-color 0.2s; }
-        .result-table tbody tr.highlight-user { background-color: #5c3b4a !important; font-weight: bold; }
-        .result-table .number { text-align: right; font-family: 'Courier New', monospace; font-weight: bold; }
-        
+        .chart-container {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 10px 15px;
+            align-items: center;
+            margin-top: 15px;
+        }
+        .chart-label { text-align: right; font-size: 0.9em; }
+        .bar-wrapper { background-color: var(--input-bg); border-radius: 5px; }
+        .bar {
+            background: linear-gradient(90deg, #17a2b8, #e94560);
+            height: 30px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            color: white;
+            padding-right: 10px;
+            font-weight: bold;
+            transition: width 0.5s ease-out;
+            white-space: nowrap;
+        }
+        .bar.me { 
+            background: var(--warning-color); 
+            justify-content: center;
+            color: #1a1a2e;
+        }
+
+        .risk-section {
+            background: var(--risk-bg-color);
+            border: 1px solid var(--risk-color);
+            border-left: 5px solid var(--risk-color);
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 25px;
+        }
+        .risk-section h4 {
+            text-align: center;
+            color: var(--risk-color);
+            font-size: 1.3em;
+        }
+        .risk-section p {
+            text-align: center;
+            line-height: 1.6;
+            font-size: 1.1em;
+            margin: 0;
+        }
+        .risk-amount {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: var(--risk-color);
+            text-shadow: 0 0 5px rgba(220, 53, 69, 0.5);
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .container { padding: 15px; }
+            .comparison-container { flex-direction: column; gap: 15px; }
+            h1 { font-size: 1.8em; }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🏢 안양역세권지구 분담금 계산기 🏢</h1>
+        <h1>안양역세권지구 분담금 계산기</h1>
         
         <div class="input-section">
-            <h3>📝 기본 정보 입력</h3>
+            <h3>기본 정보 입력</h3>
             <div class="input-group">
-                <label for="assetValue">내 권리가액 (원):</label>
-                <input type="text" id="assetValue" placeholder="예: 150000000">
+                <label for="assetValue">내 권리가액 (원)</label>
+                <input type="text" id="assetValue" value="150,000,000">
                 <p class="korean-currency" id="assetValueKorean"></p>
             </div>
             
             <div class="input-group">
-                <label for="apartmentType">평형 선택:</label>
+                <label for="apartmentType">평형 선택</label>
                 <select id="apartmentType">
                     <option value="59">59㎡ (약 25평)</option>
-                    <option value="72">72㎡ (약 30평)</option>
-                    <option value="84" selected>84㎡ (약 34평)</option>
+                    <option value="72" selected>72㎡ (약 30평)</option>
+                    <option value="84">84㎡ (약 34평)</option>
                 </select>
             </div>
-
+            
             <div class="input-group">
-                <label for="salePrice">2025년 조합원 분양가 (원):</label>
+                <label for="salePrice">2025 조합원 분양가 (원) **직접수정가능합니다.</label>
                 <input type="text" id="salePrice">
                 <p class="korean-currency" id="salePriceKorean"></p>
             </div>
         </div>
         
         <div class="calculation-section">
-            <h3>📊 분담금 계산 결과</h3>
+            <h3>계산 결과</h3>
             <div id="results"></div>
         </div>
     </div>
 
     <script>
-        // --- DATA & CONFIG ---
-        const data2021 = {
-            ratio: 109.34,
-            prices: { 59: 398900000, 72: 459200000, 84: 518050000 }
-        };
-        const initialSalePrices2025 = {
-            59: 507300000, 72: 587300000, 84: 658200000
-        };
+        const data2021 = { ratio: 109.34, prices: { 59: 398900000, 72: 459200000, 84: 518050000 } };
+        const data2025 = { ratio: 100.00, prices: { 59: 507300000, 72: 587300000, 84: 658200000 } };
+        const dataAlt = { ratio: 80.00 };
 
-        // --- ELEMENTS ---
         const assetValueInput = document.getElementById('assetValue');
         const apartmentTypeSelect = document.getElementById('apartmentType');
         const salePriceInput = document.getElementById('salePrice');
         const resultsDiv = document.getElementById('results');
 
-        // --- EVENT LISTENERS ---
-        assetValueInput.addEventListener('input', handleInput);
-        salePriceInput.addEventListener('input', handleInput);
-        apartmentTypeSelect.addEventListener('change', updateSalePrice);
+        assetValueInput.addEventListener('input', (e) => handleInput(e, calculate));
+        salePriceInput.addEventListener('input', (e) => handleInput(e, calculate));
+        apartmentTypeSelect.addEventListener('change', updateSalePriceAndCalculate);
+        document.addEventListener('DOMContentLoaded', updateSalePriceAndCalculate);
 
-        // --- FUNCTIONS ---
-        function handleInput(e) {
+        function handleInput(e, callback) {
+            const inputId = e.target.id;
             const rawValue = e.target.value.replace(/[^0-9]/g, '');
-            const formattedValue = rawValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            const formattedValue = rawValue ? parseInt(rawValue, 10).toLocaleString('ko-KR') : '';
             e.target.value = formattedValue;
-            document.getElementById(e.target.id + 'Korean').textContent = numberToKorean(rawValue);
-            calculate();
+            document.getElementById(inputId + 'Korean').textContent = numberToKorean(rawValue);
+            if (callback) callback();
         }
-
-        function updateSalePrice() {
+        
+        function updateSalePriceAndCalculate() {
             const type = apartmentTypeSelect.value;
-            const price = initialSalePrices2025?.[type];
-            salePriceInput.value = price;
-            const event = new Event('input', { bubbles: true });
-            salePriceInput.dispatchEvent(event);
+            const price = data2025.prices[type];
+            salePriceInput.value = price.toLocaleString('ko-KR');
+            document.getElementById('salePriceKorean').textContent = numberToKorean(price.toString());
+            calculate();
         }
 
         function numberToKorean(num_str) {
             const num = Number(String(num_str).replace(/,/g, ''));
             if (isNaN(num) || String(num_str).trim() === '') return '';
             if (num === 0) return '영원';
-
             const numChars = ["", "일", "이", "삼", "사", "오", "육", "칠", "팔", "구"];
             const smallUnits = ["", "십", "백", "천"];
             const largeUnits = ["", "만", "억", "조", "경"];
-
-            let result = "";
-            let unitIndex = 0;
-            let tempNum = num;
-
+            let result = ""; let unitIndex = 0; let tempNum = num;
             while (tempNum > 0) {
                 const chunk = tempNum % 10000;
                 if (chunk > 0) {
                     let chunkStr = "";
                     for (let i = 0; i < 4; i++) {
                         const digit = Math.floor(chunk / Math.pow(10, i)) % 10;
-                        if (digit > 0) {
-                            chunkStr = numChars[digit] + smallUnits[i] + chunkStr;
-                        }
+                        if (digit > 0) chunkStr = numChars[digit] + smallUnits[i] + chunkStr;
                     }
-                    chunkStr = chunkStr.replace(/일(?=[십백천])/g, "");
-                    result = chunkStr + largeUnits[unitIndex] + " " + result;
+                    result = chunkStr.replace(/일(?=[십백천])/g, "") + largeUnits[unitIndex] + " " + result;
                 }
-                tempNum = Math.floor(tempNum / 10000);
-                unitIndex++;
+                tempNum = Math.floor(tempNum / 10000); unitIndex++;
             }
             return result.trim().replace(/ $/, "") + "원";
         }
@@ -219,156 +263,125 @@
             return { rightValue, bundam };
         }
 
-        function generateIntuitiveComparison(result2021, result2025) {
-            const additionalBundam = result2025.bundam - result2021.bundam;
-            const increaseRate = (result2021.bundam > 0) ? (additionalBundam / result2021.bundam * 100) : 0;
-
-            return `
-                <div class="intuitive-comparison">
-                    <div class="comparison-card old">
-                        <h5>2021년 합의 분담금</h5>
-                        <p class="amount">${formatCurrency(result2021.bundam)}</p>
-                        <p class="details">권리가액: ${formatCurrency(result2021.rightValue)}<br>비례율: ${data2021.ratio}%</p>
-                    </div>
-                    <div class="arrow">→</div>
-                    <div class="comparison-card new">
-                        <h5>2025년 조합안 분담금</h5>
-                        <p class="amount">${formatCurrency(result2025.bundam)}</p>
-                        <p class="details">권리가액: ${formatCurrency(result2025.rightValue)}<br>비례율: 100%</p>
-                    </div>
-                </div>
-                <div class="additional-burden-box">
-                    <h5>총 추가 분담금</h5>
-                    <p class="amount">${formatCurrency(additionalBundam)}</p>
-                    <p class="increase-rate">기존 대비 ${increaseRate.toFixed(1)}% 증가</p>
-                </div>
-            `;
-        }
-
-        function generateBurdenRangeVisualization(currentUserAsset, apartmentType, salePrice2025) {
-            const minSampleAsset = 100000000;
-            const maxSampleAsset = 500000000;
-
-            const resMinAsset2021 = calculateBundam(data2021.prices[apartmentType], data2021.ratio, minSampleAsset);
-            const resMinAsset2025 = calculateBundam(salePrice2025, 100, minSampleAsset);
-            const maxIncrease = resMinAsset2025.bundam - resMinAsset2021.bundam;
-
-            const resMaxAsset2021 = calculateBundam(data2021.prices[apartmentType], data2021.ratio, maxSampleAsset);
-            const resMaxAsset2025 = calculateBundam(salePrice2025, 100, maxSampleAsset);
-            const minIncrease = resMaxAsset2025.bundam - resMaxAsset2021.bundam;
-            
-            const resUser2021 = calculateBundam(data2021.prices[apartmentType], data2021.ratio, currentUserAsset);
-            const resUser2025 = calculateBundam(salePrice2025, 100, currentUserAsset);
-            const userIncrease = resUser2025.bundam - resUser2021.bundam;
-
-            const range = maxIncrease - minIncrease;
-            if (range <= 0) return '';
-            
-            const positionPercent = Math.max(0, Math.min(100, (userIncrease - minIncrease) / range * 100));
-
-            return `
-                <div class="burden-range-visualization">
-                    <h4>📉 내 추가 분담금은 어느 수준일까?</h4>
-                    <div class="burden-bar-labels">
-                        <span>적게 오름 (권리가액 높음)</span>
-                        <span>많이 오름 (권리가액 낮음)</span>
-                    </div>
-                    <div class="burden-bar-container">
-                        <div class="burden-marker" style="left: ${100 - positionPercent}%;"></div>
-                    </div>
-                    <div class="burden-bar-labels">
-                        <span>${formatCurrency(minIncrease)}</span>
-                        <span>${formatCurrency(maxIncrease)}</span>
-                    </div>
-                    <p class="burden-summary">내 권리가액(<strong>${formatCurrency(currentUserAsset)}</strong>)의 추가 분담금은 <strong>${formatCurrency(userIncrease)}</strong> 입니다.<br>이는 권리가액이 낮은 사람일수록 더 많은 금액이 오르는 구조를 보여줍니다.</p>
-                </div>
-            `;
-        }
-        
-        function generateDetailedTable(currentUserAsset, apartmentType, salePrice2025) {
-            let html = `
-                <div class="detailed-table-section">
-                    <h4>📑 권리가액별 분담금 상세 비교표</h4>
-                    <div class="result-table-wrapper">
-                        <table class="result-table">
-                            <thead>
-                                <tr>
-                                    <th rowspan="2">권리가액</th>
-                                    <th colspan="2" class="header-2021">2021년 합의안 (비례율 ${data2021.ratio}%)</th>
-                                    <th colspan="3" class="header-2025">2025년 조합안 (비례율 100%)</th>
-                                    <th colspan="2" class="header-alt">대안 (비례율 90% 가정)</th>
-                                </tr>
-                                <tr>
-                                    <th class="header-2021">권리가액</th>
-                                    <th class="header-2021">분담금</th>
-                                    <th class="header-2025">권리가액</th>
-                                    <th class="header-2025">분담금</th>
-                                    <th class="header-2025">추가분담금</th>
-                                    <th class="header-alt">권리가액</th>
-                                    <th class="header-alt">분담금</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-            `;
-            const sampleAssets = [100000000, 150000000, 200000000, 250000000, 300000000, 400000000];
-            const uniqueSortedAssets = [...new Set([...sampleAssets, currentUserAsset])].sort((a,b) => a-b);
-
-            uniqueSortedAssets.forEach(asset => {
-                const res2021 = calculateBundam(data2021.prices[apartmentType], data2021.ratio, asset);
-                const res2025 = calculateBundam(salePrice2025, 100, asset);
-                const resAlt = calculateBundam(salePrice2025, 90, asset);
-                const additional = res2025.bundam - res2021.bundam;
-
-                const rowClass = (asset === currentUserAsset) ? 'highlight-user' : '';
-
-                html += `
-                    <tr class="${rowClass}">
-                        <td class="number">${formatCurrency(asset)}</td>
-                        <td class="number">${formatCurrency(res2021.rightValue)}</td>
-                        <td class="number">${formatCurrency(res2021.bundam)}</td>
-                        <td class="number">${formatCurrency(res2025.rightValue)}</td>
-                        <td class="number">${formatCurrency(res2025.bundam)}</td>
-                        <td class="number" style="color:#ff6347;">${formatCurrency(additional)}</td>
-                        <td class="number">${formatCurrency(resAlt.rightValue)}</td>
-                        <td class="number" style="color:#32cd32;">${formatCurrency(resAlt.bundam)}</td>
-                    </tr>
-                `;
-            });
-
-            html += `</tbody></table></div></div>`;
-            return html;
+        function formatCurrency(num) {
+            return new Intl.NumberFormat('ko-KR').format(Math.round(num)) + '원';
         }
 
         function calculate() {
             const assetValue = parseFloat(assetValueInput.value.replace(/,/g, '')) || 0;
             const salePrice2025 = parseFloat(salePriceInput.value.replace(/,/g, '')) || 0;
             const apartmentType = apartmentTypeSelect.value;
-
-            if (!assetValue || !salePrice2025 || !apartmentType) {
-                resultsDiv.innerHTML = '';
+            if (!assetValue || !salePrice2025) {
+                resultsDiv.innerHTML = '<p>권리가액과 분양가를 입력해주세요.</p>';
                 return;
             }
 
-            const result2021 = calculateBundam(data2021.prices[apartmentType], data2021.ratio, assetValue);
-            const result2025 = calculateBundam(salePrice2025, 100, assetValue);
+            const sale2021 = data2021.prices[apartmentType];
 
-            let html = generateIntuitiveComparison(result2021, result2025);
-            html += '<hr style="border-color: var(--border-color); margin: 30px 0;">';
-            html += generateBurdenRangeVisualization(assetValue, apartmentType, salePrice2025);
-            html += '<hr style="border-color: var(--border-color); margin: 30px 0;">';
-            html += generateDetailedTable(assetValue, apartmentType, salePrice2025);
+            const res2021 = calculateBundam(sale2021, data2021.ratio, assetValue);
+            const res2025 = calculateBundam(salePrice2025, data2025.ratio, assetValue);
+            
+            const additionalBurden = res2025.bundam - res2021.bundam;
+            const burdenRate = assetValue > 0 ? (additionalBurden / assetValue * 100) : 0;
+
+            let html = `
+                <div class="summary-section">
+                    <div class="summary-item">
+                        <div class="summary-label">총 추가 분담금</div>
+                        <div class="summary-value">${formatCurrency(additionalBurden)}</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-label">자산 대비 추가 분담률</div>
+                        <div class="summary-value rate">${burdenRate.toFixed(1)}%</div>
+                    </div>
+                </div>
+
+                <div class="comparison-container">
+                    <div class="comparison-card old">
+                        <h5>2021년 합의안</h5>
+                        <div class="detail-item"><div class="label">조합원 분양가</div><div class="value sale-price">${formatCurrency(sale2021)}</div></div>
+                        <div class="detail-item"><div class="label">적용 비례율</div><div class="value">${data2021.ratio.toFixed(2)}%</div></div>
+                        <div class="detail-item"><div class="label">평가된 권리가액</div><div class="value">${formatCurrency(res2021.rightValue)}</div></div>
+                        <div class="detail-item"><div class="label">최종 분담금</div><div class="value final-bundam">${formatCurrency(res2021.bundam)}</div></div>
+                    </div>
+                    <div class="comparison-card new">
+                        <h5>2025년 조합안</h5>
+                        <div class="detail-item"><div class="label">조합원 분양가</div><div class="value sale-price">${formatCurrency(salePrice2025)}</div></div>
+                        <div class="detail-item"><div class="label">적용 비례율</div><div class="value">${data2025.ratio.toFixed(2)}%</div></div>
+                        <div class="detail-item"><div class="label">평가된 권리가액</div><div class="value">${formatCurrency(res2025.rightValue)}</div></div>
+                        <div class="detail-item"><div class="label">최종 분담금</div><div class="value final-bundam">${formatCurrency(res2025.bundam)}</div></div>
+                    </div>
+                </div>
+            `;
+            
+            html += `
+                <div class="analysis-section">
+                    <h4>자산 대비 추가 분담률 비교</h4>
+                    <p style="font-size:0.9em; text-align:center; color:#a0a0a0;">권리가액이 낮을수록 자산가치 대비 추가분담률이 높아지는 불공정한 구조를 보여줍니다.</p>
+                    <div class="chart-container"></div>
+                </div>
+            `;
+
+            const resAlt = calculateBundam(salePrice2025, dataAlt.ratio, assetValue);
+            const riskBurden = resAlt.bundam - res2025.bundam;
+
+            html += `
+                <div class="risk-section">
+                    <h4>⚠️ 향후 리스크 분석</h4>
+                    <p>만약 사업비 증가 등으로 비례율이 100%에서 80%로 하락할 경우,<br>현재 조합안보다 <strong class="risk-amount">${formatCurrency(riskBurden)}</strong>의 분담금이 추가될 수 있습니다.</p>
+                </div>
+            `;
             
             resultsDiv.innerHTML = html;
+
+            const chartContainer = resultsDiv.querySelector('.chart-container');
+            if (chartContainer) {
+                const chartData = {};
+                const sampleAssets = [100000000, 150000000, 200000000, 250000000, 300000000, 400000000];
+                const uniqueAssets = [...new Set([...sampleAssets, assetValue])].sort((a,b) => a-b);
+
+                uniqueAssets.forEach(sa => {
+                    if(sa > 0) {
+                        const r21 = calculateBundam(sale2021, data2021.ratio, sa);
+                        const r25 = calculateBundam(salePrice2025, data2025.ratio, sa);
+                        chartData[sa] = (r25.bundam - r21.bundam) / sa * 100;
+                    }
+                });
+                
+                const maxRate = Math.max(0, ...Object.values(chartData));
+                
+                for (const val of uniqueAssets) {
+                    if(!chartData[val]) continue;
+
+                    const rate = chartData[val];
+                    const isCurrentUser = Number(val) === assetValue;
+                    
+                    const label = document.createElement('div');
+                    label.className = 'chart-label';
+                    label.textContent = isCurrentUser ? '나의 부담률' : `${(val/100000000).toFixed(1).replace('.0','')}억원`;
+                    if(isCurrentUser) {
+                        label.style.fontWeight = 'bold';
+                        label.style.color = 'var(--warning-color)';
+                    }
+
+                    const barWrapper = document.createElement('div');
+                    barWrapper.className = 'bar-wrapper';
+                    const bar = document.createElement('div');
+                    bar.className = 'bar';
+                    if (isCurrentUser) bar.classList.add('me');
+
+                    setTimeout(() => {
+                        bar.style.width = maxRate > 0 ? `${(rate / maxRate) * 100}%` : '0%';
+                    }, 10);
+                    
+                    bar.textContent = `${rate.toFixed(1)}%`;
+                    
+                    barWrapper.appendChild(bar);
+                    chartContainer.appendChild(label);
+                    chartContainer.appendChild(barWrapper);
+                }
+            }
         }
-
-        function formatCurrency(num) {
-            const roundedNum = Math.round(num);
-            return new Intl.NumberFormat('ko-KR').format(roundedNum) + '원';
-        }
-
-        // --- INITIALIZATION ---
-        document.addEventListener('DOMContentLoaded', updateSalePrice);
-
     </script>
 </body>
 </html>
