@@ -43,7 +43,7 @@
             text-align: center;
             padding: 40px;
             border-radius: 16px;
-            margin-bottom: 20px; /* 버튼과의 간격을 위해 조정 */
+            margin-bottom: 20px;
             border: 1px solid var(--border-color);
         }
         .header .subtitle {
@@ -63,7 +63,6 @@
             color: var(--text-secondary);
         }
 
-        /* ▼▼▼ 녹취 듣기 버튼 스타일 (수정) ▼▼▼ */
         .playback-controls {
             text-align: center;
             margin-bottom: 40px;
@@ -82,7 +81,6 @@
         #bgm-toggle-btn:hover {
             background-color: #2775E6;
         }
-        /* ▲▲▲ 녹취 듣기 버튼 스타일 ▲▲▲ */
 
         .card {
             background: var(--primary-card-bg);
@@ -248,6 +246,7 @@
         <div class="playback-controls">
             <button id="bgm-toggle-btn">녹취 듣기</button>
         </div>
+
         <section class="card">
             <div class="evidence-header">
                 <div class="evidence-number">1</div>
@@ -421,14 +420,13 @@
         </footer>
     </div>
 
-    <audio id="bgm-player" src="https://ojstyle.github.io/aythelove/bgm.aac" loop autoplay></audio>
+    <audio id="bgm-player" src="https://raw.githubusercontent.com/ojstyle/aythelove/main/bgm.aac" loop autoplay></audio>
 
     <script>
         const bgmPlayer = document.getElementById('bgm-player');
         const toggleButton = document.getElementById('bgm-toggle-btn');
 
-        // 배경음악 소리를 20%로 설정
-        bgmPlayer.volume = 0.2;
+        bgmPlayer.volume = 0.2; // 소리 크기 20%로 설정
 
         // 버튼 클릭 시 재생/멈춤 토글
         toggleButton.addEventListener('click', () => {
@@ -448,13 +446,17 @@
             toggleButton.innerText = '녹취 듣기';
         });
 
-        // 페이지 로드 시 자동재생 실패를 대비해 초기 버튼 상태 확인
-        // (대부분의 브라우저에서 자동재생이 막히므로, 초기 상태는 'paused'일 가능성이 높음)
+        // 페이지 로드 시 자동재생을 시도하고, 실패할 경우를 대비해 버튼 상태를 업데이트
         window.addEventListener('load', () => {
-            if(bgmPlayer.paused){
-                toggleButton.innerText = '녹취 듣기';
-            } else {
-                 toggleButton.innerText = '녹취 멈춤';
+            let playPromise = bgmPlayer.play();
+            if (playPromise !== undefined) {
+                playPromise.then(_ => {
+                    // 자동 재생 성공
+                    toggleButton.innerText = '녹취 멈춤';
+                }).catch(error => {
+                    // 자동 재생 실패 (사용자 인터랙션 필요)
+                    toggleButton.innerText = '녹취 듣기';
+                });
             }
         });
     </script>
