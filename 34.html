@@ -43,7 +43,7 @@
             text-align: center;
             padding: 40px;
             border-radius: 16px;
-            margin-bottom: 40px;
+            margin-bottom: 20px; /* 버튼과의 간격을 위해 조정 */
             border: 1px solid var(--border-color);
         }
         .header .subtitle {
@@ -62,6 +62,27 @@
             font-size: 1.2rem;
             color: var(--text-secondary);
         }
+
+        /* ▼▼▼ 녹취 듣기 버튼 스타일 (수정) ▼▼▼ */
+        .playback-controls {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        #bgm-toggle-btn {
+            padding: 12px 25px;
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 700;
+            transition: background-color 0.2s;
+        }
+        #bgm-toggle-btn:hover {
+            background-color: #2775E6;
+        }
+        /* ▲▲▲ 녹취 듣기 버튼 스타일 ▲▲▲ */
 
         .card {
             background: var(--primary-card-bg);
@@ -224,6 +245,9 @@
             <p class="crisis-text">16분 통화 녹취에 드러난 조합원 기만 행위 정황</p>
         </header>
 
+        <div class="playback-controls">
+            <button id="bgm-toggle-btn">녹취 듣기</button>
+        </div>
         <section class="card">
             <div class="evidence-header">
                 <div class="evidence-number">1</div>
@@ -396,5 +420,44 @@
             <p class="signature">안양역지사지 연대 드림</p>
         </footer>
     </div>
+
+    <audio id="bgm-player" src="bgm.mp3" loop autoplay></audio>
+
+    <script>
+        const bgmPlayer = document.getElementById('bgm-player');
+        const toggleButton = document.getElementById('bgm-toggle-btn');
+
+        // 배경음악 소리를 20%로 설정
+        bgmPlayer.volume = 0.2;
+
+        // 버튼 클릭 시 재생/멈춤 토글
+        toggleButton.addEventListener('click', () => {
+            if (bgmPlayer.paused) {
+                bgmPlayer.play();
+            } else {
+                bgmPlayer.pause();
+            }
+        });
+
+        // 오디오 재생 상태에 따라 버튼 텍스트 변경
+        bgmPlayer.addEventListener('play', () => {
+            toggleButton.innerText = '녹취 멈춤';
+        });
+
+        bgmPlayer.addEventListener('pause', () => {
+            toggleButton.innerText = '녹취 듣기';
+        });
+
+        // 페이지 로드 시 자동재생 실패를 대비해 초기 버튼 상태 확인
+        // (대부분의 브라우저에서 자동재생이 막히므로, 초기 상태는 'paused'일 가능성이 높음)
+        window.addEventListener('load', () => {
+            if(bgmPlayer.paused){
+                toggleButton.innerText = '녹취 듣기';
+            } else {
+                 toggleButton.innerText = '녹취 멈춤';
+            }
+        });
+    </script>
+
 </body>
 </html>
