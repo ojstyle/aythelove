@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>조합 홍보직원 사칭 의혹 분석 보고서</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+
+        :root {
+            --bg-color: #12141D;
+            --primary-card-bg: #1A1D2A;
+            --secondary-card-bg: rgba(36, 40, 61, 0.5);
+            --accent-color: #3884FF;
+            --highlight-color: #FFDE59;
+            --text-primary: #EAEBEE;
+            --text-secondary: #A9ADC1;
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 17px;
+            line-height: 1.8;
+            color: var(--text-primary);
+            background-color: var(--bg-color);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            background: var(--primary-card-bg);
+            text-align: center;
+            padding: 40px;
+            border-radius: 16px;
+            margin-bottom: 40px;
+            border: 1px solid var(--border-color);
+        }
+        .header .subtitle {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--accent-color);
+            margin-bottom: 8px;
+        }
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 12px;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+        .header .crisis-text {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        .card {
+            background: var(--primary-card-bg);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .evidence-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .evidence-number {
+            background: var(--accent-color);
+            color: white;
+            min-width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+        .evidence-title h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        .evidence-title p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        .conversation-box {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .speaker {
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 5px;
+        }
+        .speaker.staff { color: #FF7B89; }
+        .dialogue {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+        .analysis-box {
+            background: var(--secondary-card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 25px;
+        }
+        .analysis-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--highlight-color);
+        }
+        .analysis-content, .analysis-content ul {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            padding-left: 20px;
+        }
+        
+        .metrics-container-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .summary-item {
+            background: linear-gradient(145deg, #2a2d3d, #1a1d2a);
+            border-radius: 12px;
+            padding: 25px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .summary-item:hover {
+            transform: translateY(-5px);
+        }
+        .summary-item h3 {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+        .summary-item p {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .conclusion-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .conclusion-item {
+            background: var(--secondary-card-bg);
+            padding: 25px;
+            border-radius: 12px;
+        }
+        .conclusion-item h3 {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .final-message {
+            text-align: center;
+            padding: 50px 20px 20px;
+            margin-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+        .final-message p {
+            font-size: 1.2rem;
+            font-weight: 500;
+            line-height: 2;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+        }
+        .final-message .signature {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+        }
+        
+        @media (max-width: 768px) {
+            .conclusion-list {
+                grid-template-columns: 1fr;
+            }
+            .header h1 { font-size: 2.2rem; }
+            .evidence-title h2 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <p class="subtitle">통화 녹취 파일 분석 보고서</p>
+            <h1>조합 홍보직원 사칭 의혹</h1>
+            <p class="crisis-text">16분 통화 녹취에 드러난 조합원 기만 행위 정황</p>
+        </header>
+
+        <section class="card">
+            <div class="evidence-header">
+                <div class="evidence-number">1</div>
+                <div class="evidence-title">
+                    <h2>신분 사칭</h2>
+                    <p>"현대산업개발에서 나왔습니다" 허위 신분 주장</p>
+                </div>
+            </div>
+             <div class="conversation-box">
+                <p class="speaker">조합원:</p>
+                <p class="dialogue">"현대건설에서 이렇게 전화를 주는 건가요?"</p>
+            </div>
+            <div class="conversation-box">
+                <p class="speaker staff">최OO 과장:</p>
+                <p class="dialogue">"네, 그렇습니다. 현대산업개발입니다."</p>
+            </div>
+            <div class="analysis-box">
+                <h3 class="analysis-title">분석 결과</h3>
+                <ul class="analysis-content">
+                    <li>조합원이 재차 신분을 확인했으나 공식 명함이나 직위 증명 없이 구두로만 주장함.</li>
+                    <li>이후 "홍보팀에서 일시적으로 지원 나온 것"이라고 모호하게 설명하며 소속을 명확히 밝히지 않음.</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section class="card">
+            <div class="evidence-header">
+                <div class="evidence-number">2</div>
+                <div class="evidence-title">
+                    <h2>공사 지연 책임 전가</h2>
+                    <p>비대위와 반대 조합원에게 모든 책임 떠넘기기</p>
+                </div>
+            </div>
+             <div class="conversation-box">
+                <p class="speaker staff">최OO 과장:</p>
+                <p class="dialogue">"일부 반대하시는 분들이 총회를 반대해서… 안건이 통과가 안 되면 사업이 지연됩니다."</p>
+            </div>
+            <div class="analysis-box">
+                <h3 class="analysis-title">분석 결과</h3>
+                 <ul class="analysis-content">
+                    <li>총회 5호 안건 통과를 강조하며 사업 지연 가능성의 책임을 '반대 조합원' 탓으로 돌림.</li>
+                    <li>단순 홍보를 넘어 조합원 간의 갈등을 조장하는 설득 전략을 사용함.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="card">
+            <div class="evidence-header">
+                <div class="evidence-number">3</div>
+                <div class="evidence-title">
+                    <h2>모순된 공사 일정 설명</h2>
+                    <p>착공 완료와 지연 가능성을 동시에 언급</p>
+                </div>
+            </div>
+            <div class="conversation-box">
+                 <p class="speaker staff">최OO 과장:</p>
+                <p class="dialogue">"이번 안건이 통과 안 되면 자금 흐름도 막히고 이자도 늘고, 사업이 늦어지면 입주도 늦어집니다. 계속 지지부진하다가 착공이 안 되고, 결국 사업비만 늘어나는 악순환이 됩니다."</p>
+            </div>
+            <div class="analysis-box">
+                <h3 class="analysis-title">분석 결과</h3>
+                <ul class="analysis-content">
+                    <li>'이미 착공했다'는 기존 조합의 주장과 달리, 총회 결과에 따라 착공이 안 될 수 있다는 모순된 설명을 함.</li>
+                    <li>시공사의 책임에 대한 조합원의 질문에 "위에서 정해진 것"이라며 애매한 답변으로 회피함.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="card">
+            <div class="evidence-header">
+                <div class="evidence-number">4</div>
+                <div class="evidence-title">
+                    <h2>핵심 질문 회피</h2>
+                    <p>공사비 및 계약 이행 관련 질문에 답변 거부</p>
+                </div>
+            </div>
+             <div class="conversation-box">
+                <p class="speaker">조합원:</p>
+                <p class="dialogue">"공사비 올려주지 않으면 착공 안 하겠다는 기사 봤어요. 신뢰할 수 있습니까?"</p>
+            </div>
+            <div class="conversation-box">
+                <p class="speaker staff">최OO 과장:</p>
+                <p class="dialogue">"그건 제가 책임 있게 말씀드릴 입장은 아니고요..."</p>
+            </div>
+            <div class="analysis-box">
+                <h3 class="analysis-title">분석 결과</h3>
+                <ul class="analysis-content">
+                    <li>광주 화정 사고 이후 현대산업개발의 계약 번복 사례 등 민감한 질문에 "답변할 입장이 아니다"라며 회피함.</li>
+                    <li>평당 공사비, 자재 수준 등 핵심적인 사안에 대해 "상부에 보고하겠다"는 말로 책임을 전가함.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="card">
+            <div class="evidence-header">
+                <div class="evidence-number">5</div>
+                <div class="evidence-title">
+                    <h2>갑을관계 역전 지적에 묵인</h2>
+                    <p>시공사가 조합을 압박하는 상황에 반박하지 않음</p>
+                </div>
+            </div>
+            <div class="conversation-box">
+                <p class="speaker">조합원:</p>
+                <p class="dialogue">"조합이 갑이고 시공사는 을인데, 계약서를 아무렇지 않게 뒤집고 '을'이 '갑'처럼 행동하니까 신뢰가 안 생깁니다."</p>
+            </div>
+            <div class="analysis-box">
+                <h3 class="analysis-title">분석 결과</h3>
+                <ul class="analysis-content">
+                    <li>조합원의 핵심적인 지적에 대해 직접적인 반론 없이 침묵으로 일관함.</li>
+                    <li>"불신을 이해한다"는 형식적인 답변만 반복하며 상황에 대한 해명을 회피함.</li>
+                </ul>
+            </div>
+        </section>
+        
+        <div class="card">
+            <h2 class="metrics-container-title">핵심 문제 요약</h2>
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <h3>신분</h3>
+                    <p>사칭 의혹</p>
+                </div>
+                <div class="summary-item">
+                    <h3>설명 방식</h3>
+                    <p>논리적 모순</p>
+                </div>
+                <div class="summary-item">
+                    <h3>책임 소재</h3>
+                    <p>조합원에게 전가</p>
+                </div>
+                <div class="summary-item">
+                    <h3>핵심 정보</h3>
+                    <p>답변 회피</p>
+                </div>
+                <div class="summary-item">
+                    <h3>태도</h3>
+                    <p>묵인으로 일관</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="evidence-header">
+                 <h2 class="evidence-title" style="margin-bottom:0; padding-bottom:0;">결론</h2>
+            </div>
+            <div class="conclusion-list">
+                <div class="conclusion-item">
+                    <h3>신분 사칭</h3>
+                    <p>조합이 고용한 홍보직원이 시공사를 사칭하며 조합원을 설득한 정황이 뚜렷합니다.</p>
+                </div>
+                <div class="conclusion-item">
+                    <h3>증빙 부재</h3>
+                    <p>소속을 증명할 방법 없이, 구두로만 시공사 직원임을 주장하고 있습니다.</p>
+                </div>
+                <div class="conclusion-item">
+                    <h3>책임 전가</h3>
+                    <p>사업 지연의 책임을 조합원에게 떠넘기며 내부 갈등을 부추기고 있습니다.</p>
+                </div>
+                <div class="conclusion-item">
+                    <h3>정보 차단</h3>
+                    <p>조합원의 정당한 질문에 모르쇠로 일관하며 정확한 정보 제공을 거부하고 있습니다.</p>
+                </div>
+            </div>
+        </div>
+
+        <footer class="final-message">
+            <p>
+                "이제는 하다하다 시공사를 사칭한다는 의심까지 사고 있는 조합에게 말씀드립니다.<br>
+                인간이 인간에게 그러면 안됩니다.<br>
+                괴물은 되지맙시다."
+            </p>
+            <p class="signature">안양역지사지 연대 드림</p>
+        </footer>
+    </div>
+</body>
+</html>
