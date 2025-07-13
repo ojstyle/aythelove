@@ -17,10 +17,17 @@
             --success-color: #28a745;
             --warning-color: #ffc107;
             --info-color: #3498db;
+            --purple-color: #9b59b6;
+            --teal-color: #1abc9c;
+            --lime-color: #cddc39;
             --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
         }
         
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * { 
+            box-sizing: border-box; 
+            margin: 0;
+            padding: 0;
+        }
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -79,7 +86,33 @@
             font-weight: bold;
         }
         
-        /* 종합 비교표 스타일 */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, rgba(31, 64, 104, 0.6), rgba(15, 52, 96, 0.6));
+            padding: 25px;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
         .summary-table {
             width: 100%;
             border-collapse: collapse;
@@ -91,7 +124,7 @@
             font-size: 1rem;
         }
         .summary-table th, .summary-table td {
-            padding: 16px;
+            padding: 12px 10px;
             text-align: center;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             border-right: 1px solid rgba(255, 255, 255, 0.1);
@@ -102,7 +135,6 @@
         .summary-table thead th {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             font-size: 1.1rem;
-            font-weight: 700;
         }
         .summary-table tbody tr:hover td {
             background: rgba(255, 255, 255, 0.05);
@@ -118,9 +150,10 @@
         }
         .price-gap {
             font-weight: bold;
-            color: var(--success-color);
             font-size: 1.1em;
         }
+        .price-gap.cheaper { color: var(--success-color); }
+        .price-gap.expensive { color: var(--secondary-color); }
         .increase-rate {
             font-size: 0.9em;
             color: var(--warning-color);
@@ -149,7 +182,6 @@
             .main-card { padding: 20px; }
             h1 { font-size: 2rem; }
             .summary-table { font-size: 0.85rem; }
-            .summary-table th, .summary-table td { padding: 10px 8px; }
             #chart-container { height: 450px; }
         }
 
@@ -164,38 +196,65 @@
                 <p>2025년 우리 조합의 분양가는 인근 지역 대비 <strong><span class="highlight-number">1억원 이상</span></strong> 높을 뿐만 아니라, 불과 3년 전인 2022년 분양가에 비해서도 <strong><span class="highlight-number">평균 27%</span></strong> 이상 급등했습니다.</p>
             </div>
             
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">27.3%</div>
+                    <div class="stat-label">평균 가격 상승률<br>(2022년 대비)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">1.41억원</div>
+                    <div class="stat-label">최대 가격 차이<br>(인근 지역 대비)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">6개</div>
+                    <div class="stat-label">비교 대상 지역<br>(신축 아파트)</div>
+                </div>
+            </div>
+
             <h2 class="section-title">📊 종합 비교표</h2>
             <table class="summary-table">
                 <thead>
                     <tr>
                         <th>평형</th>
                         <th>🏗️ 안양역세권</th>
-                        <th>🏢 안양 상록지구</th>
+                        <th>🏢 안양 상록</th>
                         <th>🏰 광명 뉴타운9</th>
                         <th>🏡 의왕 고천나</th>
+                        <th>🌳 신림2</th>
+                        <th>⭐ 노량진6</th>
+                        <th>🌄 상대원2</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td class="type-name">59㎡</td>
                         <td class="anyang-cell">5.05억<br><span class="increase-rate">(+27.2%)</span></td>
-                        <td>4.0억<br><span class="price-gap">(-1.05억)</span></td>
-                        <td>4.3억<br><span class="price-gap">(-0.75억)</span></td>
-                        <td>4.1 ~ 4.2억<br><span class="price-gap">(-0.85억)</span></td>
+                        <td>4.0억<br><span class="price-gap cheaper">(-1.05억)</span></td>
+                        <td>4.3억<br><span class="price-gap cheaper">(-0.75억)</span></td>
+                        <td>4.2억<br><span class="price-gap cheaper">(-0.85억)</span></td>
+                        <td>4.2억<br><span class="price-gap cheaper">(-0.85억)</span></td>
+                        <td>5.7억<br><span class="price-gap expensive">(+0.65억)</span></td>
+                        <td>4.6억<br><span class="price-gap cheaper">(-0.45억)</span></td>
                     </tr>
                     <tr>
                         <td class="type-name">72㎡</td>
                         <td class="anyang-cell">5.87억<br><span class="increase-rate">(+27.9%)</span></td>
-                        <td>4.9억<br><span class="price-gap">(-0.97억)</span></td>
-                        <td>4.9 ~ 5.2억<br><span class="price-gap">(-0.67억)</span></td>
-                        <td>4.8 ~ 5.0억<br><span class="price-gap">(-0.87억)</span></td>
+                        <td>4.9억<br><span class="price-gap cheaper">(-0.97억)</span></td>
+                        <td>5.2억<br><span class="price-gap cheaper">(-0.67억)</span></td>
+                        <td>5.0억<br><span class="price-gap cheaper">(-0.87억)</span></td>
+                        <td>5.18억<br><span class="price-gap cheaper">(-0.69억)</span></td>
+                        <td>5.18억<br><span class="price-gap cheaper">(-0.69억)</span></td>
+                        <td>5.0억<br><span class="price-gap cheaper">(-0.87억)</span></td>
                     </tr>
                     <tr>
                         <td class="type-name">84㎡</td>
                         <td class="anyang-cell">6.51억<br><span class="increase-rate">(+26.9%)</span></td>
-                        <td>5.1억<br><span class="price-gap">(-1.41억)</span></td>
-                        <td>5.5 ~ 5.6억<br><span class="price-gap">(-0.91억)</span></td>
-                        <td>5.2 ~ 5.4억<br><span class="price-gap">(-1.11억)</span></td>
+                        <td>5.1억<br><span class="price-gap cheaper">(-1.41억)</span></td>
+                        <td>5.6억<br><span class="price-gap cheaper">(-0.91억)</span></td>
+                        <td>5.4억<br><span class="price-gap cheaper">(-1.11억)</span></td>
+                        <td>5.3억<br><span class="price-gap cheaper">(-1.21억)</span></td>
+                        <td>6.7억<br><span class="price-gap expensive">(+0.19억)</span></td>
+                        <td>5.6억<br><span class="price-gap cheaper">(-0.91억)</span></td>
                     </tr>
                 </tbody>
             </table>
@@ -223,6 +282,9 @@
             const successColor = styles.getPropertyValue('--success-color').trim();
             const warningColor = styles.getPropertyValue('--warning-color').trim();
             const infoColor = styles.getPropertyValue('--info-color').trim();
+            const purpleColor = styles.getPropertyValue('--purple-color').trim();
+            const tealColor = styles.getPropertyValue('--teal-color').trim();
+            const limeColor = styles.getPropertyValue('--lime-color').trim();
             const textColor = styles.getPropertyValue('--text-color').trim();
             const borderColor = 'rgba(224, 224, 224, 0.2)';
 
@@ -241,7 +303,7 @@
                             pointBackgroundColor: 'white',
                             tension: 0.1,
                             yAxisID: 'y',
-                            order: 0 
+                            order: 0
                         },
                         {
                             type: 'bar',
@@ -270,6 +332,27 @@
                             data: [4.2, 5.0, 5.4],
                             backgroundColor: infoColor,
                             order: 4
+                        },
+                        {
+                            type: 'bar',
+                            label: '신림2',
+                            data: [4.2, 5.18, 5.3],
+                            backgroundColor: purpleColor,
+                            order: 5
+                        },
+                        {
+                            type: 'bar',
+                            label: '노량진6',
+                            data: [5.7, 5.18, 6.7],
+                            backgroundColor: tealColor,
+                            order: 6
+                        },
+                        {
+                            type: 'bar',
+                            label: '상대원2',
+                            data: [4.6, 5.0, 5.6],
+                            backgroundColor: limeColor,
+                            order: 7
                         }
                     ]
                 },
@@ -290,7 +373,7 @@
                                     let label = context.dataset.label || '';
                                     if (label) { label += ': '; }
                                     if (context.parsed.y !== null) {
-                                        label += context.parsed.y + '억';
+                                        label += context.parsed.y.toFixed(2) + '억';
                                     }
                                     return label;
                                 }
