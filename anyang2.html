@@ -1,0 +1,296 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>안양역세권 재개발 사태, 무엇이 문제인가? (어두운 테마)</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #2c2c2c;
+            color: #e0e0e0;
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #363636;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        header {
+            text-align: center;
+            border-bottom: 3px solid #4a4a4a;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        header h1 {
+            font-size: 2.2em;
+            color: #ff8a80; /* Light Coral */
+            margin: 0;
+            font-weight: 700;
+        }
+        header p {
+            font-size: 1.1em;
+            color: #bdbdbd;
+            margin-top: 10px;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .section-title {
+            font-size: 1.8em;
+            color: #f5f5f5;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #555;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+        }
+        .section-title::before {
+            content: '■';
+            color: #ff8a80;
+            margin-right: 12px;
+            font-size: 0.8em;
+        }
+        /* Timeline Styles */
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #4a4a4a;
+            border-radius: 2px;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+            padding-left: 50px;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 12px;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            background: #363636;
+            border: 4px solid #ff8a80;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        .timeline-date {
+            font-weight: 700;
+            color: #ff8a80;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.1em;
+        }
+        .timeline-content {
+            background-color: #424242;
+            color: #e0e0e0;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #555;
+        }
+        .timeline-content strong {
+            color: #fff;
+            font-weight: 500;
+        }
+
+        /* Issues Section Styles */
+        .issue-card {
+            background-color: #424242;
+            border: 1px solid #555;
+            border-left: 5px solid #ff8a80;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .issue-card h3 {
+            font-size: 1.4em;
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #ff8a80;
+            font-weight: 500;
+        }
+        .issue-card p, .issue-card ul {
+            margin: 0;
+        }
+        .issue-card ul {
+            padding-left: 20px;
+            color: #bdbdbd;
+        }
+        .issue-card li {
+            margin-bottom: 8px;
+        }
+        
+        /* Outlook Section Style */
+        .outlook-box {
+            background-color: #424242;
+            border: 1px solid #555;
+            border-left: 5px solid #ffd54f; /* Light Amber */
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .outlook-box h3 {
+            font-size: 1.4em;
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #ffd54f;
+            font-weight: 500;
+        }
+        .outlook-box p {
+            color: #e0e0e0;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #4a4a4a;
+            color: #9e9e9e;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>안양역세권 재개발 사태, 무엇이 문제인가?</h1>
+            <p>조합장의 독단적 사업 진행부터 공사 중단까지, 사태의 전말을 상세히 정리합니다.</p>
+        </header>
+
+        <div class="section">
+            <h2 class="section-title">타임라인으로 보는 사태의 전개 (상세판)</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span class="timeline-date">2025년 2월 27일</span>
+                    <div class="timeline-content"><strong>공사비 증액안 통과:</strong> 평당 675만원의 공사비 증액 안건이 조합 총회에서 통과됩니다. (찬성 276, 반대 102)</div>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">3월 21일</span>
+                    <div class="timeline-content"><strong>공사도급 변경계약 체결:</strong> 증액된 공사비를 바탕으로 시공사와 공사도급 변경계약을 체결합니다.</div>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">3월 28일</span>
+                    <div class="timeline-content"><strong>시공사의 총회 개최 요구:</strong> 시공사(현산)는 계약서(제27조 3항)에 근거, 5월 중 관리처분 총회를 개최해달라고 조합에 공식 요청합니다.</div>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">4월 11일</span>
+                    <div class="timeline-content"><strong>조합의 답변 및 지연:</strong> 조합은 문화재 발굴 등을 이유로 6월 중 개최하겠다고 회신하며 시한을 미룹니다.</div>
+                </div>
+                 <div class="timeline-item">
+                    <span class="timeline-date">5월 16일</span>
+                    <div class="timeline-content"><strong>'아파트 포함' 종후자산 재평가 의뢰:</strong> 조합은 안양시에 관리처분계획 변경을 이유로 감정평가를 의뢰하며, 기존에 언급했던 상가 외에 '아파트'까지 슬그머니 끼워 넣어 종후자산 재평가를 신청합니다.</div>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">5월 20일</span>
+                    <div class="timeline-content"><strong>일반분양가 합의:</strong> 시공사와 일반분양가를 평당 3,250만원으로 합의합니다. (단, 미분양 대책비 감안 시 실질 분양가는 3,083만원 수준)</div>
+                </div>
+                 <div class="timeline-item">
+                    <span class="timeline-date">5월 23일</span>
+                    <div class="timeline-content"><strong>감정평가수수료 예치 통보:</strong> 조합은 안양시에 3억 6백만원의 감정평가수수료 예치 사실을 통보합니다.</div>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">6월 2일 ~ 10일</span>
+                    <div class="timeline-content"><strong>종후자산재평가 실시:</strong> 조합 주도로 종후자산 재평가가 진행됩니다.</div>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">6월 4일</span>
+                    <div class="timeline-content"><strong>‘선착공’ 근거 마련:</strong> 조합장은 대의원회의에서 ‘종후자산 재평가’를 긴급 안건으로 상정하여 현장 참석 23명의 찬성만으로 가결시킵니다.</div>
+                </div>
+                 <div class="timeline-item">
+                    <span class="timeline-date">6월 11일 이후</span>
+                    <div class="timeline-content"><strong>조합장의 '선착공' 강력 요구:</strong> 대의원회의 결과를 근거로, 조합장이 시공사 측에 '선착공'을 강력히 요구했다는 사실이 알려집니다.</div>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">6월 17일</span>
+                    <div class="timeline-content"><strong>착공신고서 제출:</strong> 조합이 안양시에 착공신고서를 제출합니다.</div>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">6월 23일</span>
+                    <div class="timeline-content"><strong>착공 예정일 고지:</strong> 만안구청에 착공 예정일이 고지됩니다.</div>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">6월 26일</span>
+                    <div class="timeline-content"><strong>시공사 요구 기한 만료:</strong> 시공사가 관리처분 총회 개최를 요구했던 90일의 기한이 만료됩니다.</div>
+                </div>
+                 <div class="timeline-item">
+                    <span class="timeline-date">6월 27일</span>
+                    <div class="timeline-content"><strong>착공 필증 교부:</strong> 안양시가 착공 필증을 교부합니다.</div>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">6월 28일 ~ 7월 21일</span>
+                    <div class="timeline-content"><strong>현산 공사 개시:</strong> HDC현대산업개발이 약 3주간 공사를 실제로 진행합니다.</div>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">7월 19일</span>
+                    <div class="timeline-content"><strong>관리처분 총회 부결:</strong> 뒤늦게 열린 총회에서 핵심 안건인 ‘관리처분계획 변경안’이 조합원 164명의 반대로 최종 부결됩니다.</div>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">7월 22일</span>
+                    <div class="timeline-content"><strong>공사 중단 통보:</strong> 시공사는 총회 부결과 계약 조항을 근거로 공사 전면 중단을 조합에 공식 통보합니다.</div>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">7월 24일</span>
+                    <div class="timeline-content"><strong>긴급 조합원 간담회 개최:</strong> 공사 중단으로 인한 긴급 조합원 간담회가 열리나, 조합장은 책임을 회피하는 태도를 보입니다.</div>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-date">7월 31일</span>
+                    <div class="timeline-content"><strong>이종구 조합장과의 면담:</strong> 조합원들이 조합장과 면담했으나, 법인세 문제 등에 대해 명확한 해명을 듣지 못합니다.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">핵심 쟁점 및 의혹</h2>
+            <div class="issue-card">
+                <h3>쟁점 1: 무리한 ‘선착공 후관처’ 추진과 책임</h3>
+                <p>전국적으로 유례를 찾기 힘든 ‘선착공 후관처’를 조합장이 독단적으로 추진한 배경에 의혹이 집중됩니다. 이는 총회 결과를 알 수 없는 상태에서 공사를 시작한 도박적인 결정으로, 결국 시공사에게 공사 중단의 빌미를 제공했습니다. 조합장은 이에 대한 책임을 인정하기보다 비대위 탓으로 돌리는 태도를 보였습니다.</p>
+            </div>
+            <div class="issue-card">
+                <h3>쟁점 2: 불투명한 130억 법인세와 추가 분담금</h3>
+                <p>조합원들은 상식 밖의 재정 계획에 문제를 제기합니다.</p>
+                <ul>
+                    <li><strong>불필요한 세금:</strong> 조합원들의 추가 분담금으로 사업 수익을 부풀려 130억 원의 막대한 법인세를 내야 하는 이유를 조합이 명확히 설명하지 못합니다.</li>
+                    <li><strong>이중 부담:</strong> 조합원들은 추가 분담금에 더해, 나중에 수익을 환급받더라도 배당세, 종부세, 건강보험료 인상 등 추가적인 세금 부담까지 떠안아야 합니다.</li>
+                    <li><strong>책임 회피:</strong> 조합장은 "세무법인에 직접 알아보라"며 조합의 설명 책임을 회피했습니다.</li>
+                </ul>
+            </div>
+             <div class="issue-card">
+                <h3>쟁점 3: 독단적 운영과 소통 부재</h3>
+                <p>모든 문제의 근원에는 조합장의 독단적 운영 방식이 있습니다.</p>
+                 <ul>
+                    <li><strong>시공사 위주 사업:</strong> 조합원의 이익보다 시공사의 공사비 지급 안정성만을 우선하는 듯한 사업 진행을 보입니다.</li>
+                    <li><strong>정보 통제:</strong> 주요 사안을 조합원에게 투명하게 공개하지 않고, 문제가 불거진 뒤에야 마지못해 공개하거나 책임을 회피하는 행태가 반복되고 있습니다.</li>
+                 </ul>
+            </div>
+        </div>
+
+        <div class="section">
+             <h2 class="section-title">향후 전망 및 우려</h2>
+             <div class="outlook-box">
+                <h3>조합장의 행보에 대한 우려</h3>
+                <p>조합원들은 조합장의 과거 이력과 현재의 태도를 근거로, 이번 공사 중단 사태를 오히려 조합원들을 압박하는 수단으로 사용할 것을 우려하고 있습니다. '법인세 감액' 등 일부 사항을 명분으로 다시 총회를 강행하고, 부결 시 발생하는 막대한 위약금으로 조합원들을 협박하여 본인의 연임 안건까지 통과시키려 할 수 있다는 합리적 의심이 제기됩니다. 실제로 유사한 문제로 장기간 파행을 겪은 서울 방화6구역의 사례는 이러한 우려를 더욱 증폭시키고 있습니다.</p>
+             </div>
+        </div>
+        
+        <footer>
+            <p>2025년 8월 4일<br>안양역세권 재개발 비상대책위원회 및 조합원 일동</p>
+        </footer>
+    </div>
+</body>
+</html>
