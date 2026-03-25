@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>안양 역세권 재개발 조합운영 실태점검 결과 | 안양시</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0c10;
+    --surface: #12151c;
+    --surface2: #1a1e28;
+    --border: #252a38;
+    --accent: #e8433a;
+    --accent2: #f5a623;
+    --accent3: #4a9eff;
+    --good: #2ecc71;
+    --text: #e8eaf0;
+    --text-muted: #6b7280;
+    --text-dim: #9ca3af;
+    --red-glow: rgba(232,67,58,0.15);
+    --yellow-glow: rgba(245,166,35,0.15);
+    --blue-glow: rgba(74,158,255,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* ── HEADER ── */
+  header {
+    position: relative;
+    padding: 60px 40px 40px;
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  header::after {
+    content: '';
+    position: absolute;
+    top: -80px; right: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(232,67,58,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(232,67,58,0.12);
+    border: 1px solid rgba(232,67,58,0.3);
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+  }
+
+  .header-badge::before {
+    content: '●';
+    animation: blink 1.5s infinite;
+    font-size: 8px;
+  }
+
+  @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0.2; } }
+
+  h1 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 900;
+    line-height: 1.2;
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+  }
+
+  h1 span { color: var(--accent); }
+
+  .header-sub {
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border-top: 1px solid var(--border);
+    border-bottom: 3px solid var(--accent);
+    position: relative;
+    z-index: 1;
+  }
+
+  .stat-cell {
+    background: var(--surface);
+    padding: 24px 28px;
+    transition: background 0.2s;
+  }
+
+  .stat-cell:hover { background: var(--surface2); }
+
+  .stat-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+
+  .stat-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .stat-num.red { color: var(--accent); }
+  .stat-num.yellow { color: var(--accent2); }
+  .stat-num.blue { color: var(--accent3); }
+  .stat-num.green { color: var(--good); }
+
+  .stat-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 6px;
+  }
+
+  /* ── MAIN LAYOUT ── */
+  main {
+    position: relative;
+    z-index: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* ── SECTION TITLES ── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 48px 0 24px;
+  }
+
+  .section-header h2 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--border), transparent);
+  }
+
+  .section-tag {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* ── YEAR TABS ── */
+  .tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 28px;
+    background: var(--surface);
+    padding: 4px;
+    border-radius: 4px;
+    width: fit-content;
+    border: 1px solid var(--border);
+  }
+
+  .tab-btn {
+    padding: 10px 28px;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.2s;
+    letter-spacing: 0.3px;
+  }
+
+  .tab-btn.active {
+    background: var(--accent);
+    color: white;
+    font-weight: 700;
+  }
+
+  .tab-btn:not(.active):hover {
+    color: var(--text);
+    background: var(--surface2);
+  }
+
+  /* ── FILTER BAR ── */
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+    align-items: center;
+  }
+
+  .filter-label {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 700;
+    margin-right: 4px;
+  }
+
+  .filter-chip {
+    padding: 6px 16px;
+    border-radius: 2px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-dim);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-weight: 500;
+  }
+
+  .filter-chip:hover { border-color: var(--text-muted); color: var(--text); }
+
+  .filter-chip.active-all { background: var(--surface2); border-color: var(--text-muted); color: var(--text); }
+  .filter-chip.active-finance { background: rgba(74,158,255,0.15); border-color: var(--accent3); color: var(--accent3); }
+  .filter-chip.active-contract { background: rgba(245,166,35,0.15); border-color: var(--accent2); color: var(--accent2); }
+  .filter-chip.active-admin { background: rgba(232,67,58,0.15); border-color: var(--accent); color: var(--accent); }
+  .filter-chip.active-info { background: rgba(46,204,113,0.15); border-color: var(--good); color: var(--good); }
+
+  /* ── TABLE ── */
+  .table-wrap {
+    overflow-x: auto;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  thead th {
+    background: var(--surface2);
+    padding: 14px 16px;
+    text-align: left;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  tbody tr {
+    border-bottom: 1px solid rgba(37,42,56,0.8);
+    transition: background 0.15s;
+    cursor: pointer;
+  }
+
+  tbody tr:hover { background: var(--surface2); }
+  tbody tr.hidden { display: none; }
+
+  td {
+    padding: 14px 16px;
+    vertical-align: middle;
+    line-height: 1.5;
+  }
+
+  .td-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-muted);
+    text-align: center;
+    width: 40px;
+  }
+
+  .category-pill {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 2px;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .cat-finance { background: rgba(74,158,255,0.15); color: var(--accent3); border: 1px solid rgba(74,158,255,0.2); }
+  .cat-contract { background: rgba(245,166,35,0.15); color: var(--accent2); border: 1px solid rgba(245,166,35,0.2); }
+  .cat-admin { background: rgba(232,67,58,0.12); color: #f87171; border: 1px solid rgba(232,67,58,0.2); }
+  .cat-info { background: rgba(46,204,113,0.1); color: var(--good); border: 1px solid rgba(46,204,113,0.2); }
+
+  .detail-text {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.6;
+    max-width: 400px;
+  }
+
+  .action-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 2px;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .act-excellent { background: rgba(46,204,113,0.15); color: var(--good); border: 1px solid rgba(46,204,113,0.3); }
+  .act-guide { background: rgba(245,166,35,0.12); color: var(--accent2); border: 1px solid rgba(245,166,35,0.25); }
+  .act-order { background: rgba(232,67,58,0.15); color: var(--accent); border: 1px solid rgba(232,67,58,0.3); }
+  .act-invest { background: rgba(139,92,246,0.2); color: #a78bfa; border: 1px solid rgba(139,92,246,0.3); }
+  .act-other { background: rgba(107,114,128,0.2); color: var(--text-muted); border: 1px solid var(--border); }
+  .act-none { color: var(--text-muted); font-size: 12px; }
+
+  .impact-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 10px;
+    border-radius: 2px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+
+  .impact-loss { background: rgba(232,67,58,0.1); color: #fca5a5; border: 1px solid rgba(232,67,58,0.2); }
+  .impact-rights { background: rgba(245,166,35,0.1); color: #fcd34d; border: 1px solid rgba(245,166,35,0.2); }
+  .impact-transparency { background: rgba(74,158,255,0.08); color: #93c5fd; border: 1px solid rgba(74,158,255,0.15); }
+  .impact-neutral { color: var(--text-muted); font-size: 12px; }
+
+  /* ── REPEAT BADGE ── */
+  .repeat-icon {
+    display: inline-block;
+    background: rgba(232,67,58,0.2);
+    color: var(--accent);
+    border: 1px solid rgba(232,67,58,0.4);
+    border-radius: 2px;
+    font-size: 9px;
+    font-weight: 900;
+    padding: 2px 5px;
+    letter-spacing: 0.5px;
+    vertical-align: middle;
+    margin-left: 4px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* ── EXPAND ROW ── */
+  .expand-row {
+    display: none;
+    background: var(--surface);
+  }
+
+  .expand-row.open { display: table-row; }
+
+  .expand-content {
+    padding: 20px 24px 20px 56px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .expand-inner {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent3);
+    padding: 16px 20px;
+    border-radius: 0 4px 4px 0;
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--text-dim);
+    white-space: pre-line;
+  }
+
+  .expand-inner strong {
+    color: var(--accent2);
+    font-weight: 700;
+  }
+
+  /* ── SUMMARY CARDS ── */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+
+  .card:hover { transform: translateY(-2px); border-color: rgba(255,255,255,0.15); }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+
+  .card.red::before { background: var(--accent); }
+  .card.yellow::before { background: var(--accent2); }
+  .card.blue::before { background: var(--accent3); }
+  .card.purple::before { background: #a78bfa; }
+
+  .card-icon {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+
+  .card-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+
+  .card-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .card-value.red { color: var(--accent); }
+  .card-value.yellow { color: var(--accent2); }
+  .card-value.blue { color: var(--accent3); }
+  .card-value.purple { color: #a78bfa; }
+
+  .card-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* ── SUMMARY TABLE ── */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  .summary-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .summary-box-header {
+    background: var(--surface2);
+    padding: 14px 20px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    border-bottom: 1px solid rgba(37,42,56,0.6);
+    font-size: 13px;
+  }
+
+  .summary-row:last-child { border-bottom: none; }
+
+  .summary-row-label { color: var(--text-dim); }
+  .summary-row-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 40px 24px;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    header { padding: 40px 20px 28px; }
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    main { padding: 28px 16px 60px; }
+    .summary-grid { grid-template-columns: 1fr; }
+    td { padding: 10px 12px; }
+    .detail-text { max-width: 200px; font-size: 12px; }
+    h1 { font-size: 24px; }
+  }
+
+  /* ── ANIMATIONS ── */
+  .fade-in { animation: fadeIn 0.4s ease forwards; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:none; } }
+
+  tr { animation: fadeIn 0.3s ease forwards; }
+
+  /* ── SEARCH ── */
+  .search-wrap {
+    position: relative;
+    margin-bottom: 20px;
+    max-width: 400px;
+  }
+
+  .search-input {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 10px 16px 10px 40px;
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .search-input:focus { border-color: var(--accent3); }
+  .search-input::placeholder { color: var(--text-muted); }
+
+  .search-icon {
+    position: absolute;
+    left: 14px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 14px;
+    pointer-events: none;
+  }
+
+  .count-display {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+  .count-display span { color: var(--accent3); font-weight: 700; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-badge">안양 역세권 재개발 조합운영 실태점검</div>
+  <h1>한 눈에 보는<br><span>실태점검 결과</span> 보고서</h1>
+  <p class="header-sub">2024년 · 2026년 점검 결과 통합 분석 — 41건 처분사항 전체 공개</p>
+</header>
+
+<div class="stats-bar">
+  <div class="stat-cell">
+    <div class="stat-label">총 지적건수</div>
+    <div class="stat-num red">41</div>
+    <div class="stat-desc">2024+2026 합산</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-label">행정지도</div>
+    <div class="stat-num yellow">26</div>
+    <div class="stat-desc">전체의 63%</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-label">시정명령</div>
+    <div class="stat-num red">11</div>
+    <div class="stat-desc">강제 시정 조치</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-label">수사의뢰</div>
+    <div class="stat-num" style="color:#a78bfa">1</div>
+    <div class="stat-desc">정보공개 위반</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-label">반복 지적</div>
+    <div class="stat-num red">6+</div>
+    <div class="stat-desc">전년 미이행 반복</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-label">우수사례</div>
+    <div class="stat-num green">1</div>
+    <div class="stat-desc">41건 중 단 1건</div>
+  </div>
+</div>
+
+<main>
+
+  <!-- ── SUMMARY CARDS ── -->
+  <div class="section-header">
+    <h2>핵심 리스크 요약</h2>
+    <div class="section-line"></div>
+    <span class="section-tag">Key Risks</span>
+  </div>
+
+  <div class="cards-grid">
+    <div class="card red">
+      <div class="card-icon">💸</div>
+      <div class="card-title">조합원 손실 위험</div>
+      <div class="card-value red">125억+</div>
+      <div class="card-desc">법인세·지방소득세 과다 계상으로 인한 조합원 추가 손실 추정액. 종후자산 재평가로 484억 추가 부담 발생.</div>
+    </div>
+    <div class="card yellow">
+      <div class="card-icon">🔄</div>
+      <div class="card-title">반복 미이행 사항</div>
+      <div class="card-value yellow">6건</div>
+      <div class="card-desc">전년도 지적에도 불구하고 동일 항목 미이행 반복. 원천징수, 예비비 무단사용, 서면계약서 미작성 등.</div>
+    </div>
+    <div class="card blue">
+      <div class="card-icon">🔒</div>
+      <div class="card-title">조합원 권리 침해</div>
+      <div class="card-value blue">7건</div>
+      <div class="card-desc">총회 의결 없는 계약 체결, 피선거권 침해, 정보공개 지연·미공개 등 조합원 권리 박탈 사항.</div>
+    </div>
+    <div class="card purple">
+      <div class="card-icon">⚖️</div>
+      <div class="card-title">수사의뢰</div>
+      <div class="card-value purple">도정법 위반</div>
+      <div class="card-desc">공문서 3건 지연공개, 의사록 등 4건 지연·2건 미공개, 회계자료 30건 지연·2건 미공개. 상습적 법 위반.</div>
+    </div>
+  </div>
+
+  <!-- ── YEAR SUMMARY ── -->
+  <div class="summary-grid">
+    <div class="summary-box">
+      <div class="summary-box-header">2024년 점검 (23건 점검 → 21건 처분)</div>
+      <div class="summary-row"><span class="summary-row-label">우수사례</span><span class="summary-row-value" style="color:var(--good)">1건</span></div>
+      <div class="summary-row"><span class="summary-row-label">행정지도</span><span class="summary-row-value" style="color:var(--accent2)">16건</span></div>
+      <div class="summary-row"><span class="summary-row-label">↳ 자금회계</span><span class="summary-row-value">8건</span></div>
+      <div class="summary-row"><span class="summary-row-label">↳ 계약</span><span class="summary-row-value">2건</span></div>
+      <div class="summary-row"><span class="summary-row-label">↳ 조합행정</span><span class="summary-row-value">5건</span></div>
+      <div class="summary-row"><span class="summary-row-label">↳ 정보공개</span><span class="summary-row-value">1건</span></div>
+      <div class="summary-row"><span class="summary-row-label">시정명령</span><span class="summary-row-value" style="color:var(--accent)">4건</span></div>
+      <div class="summary-row"><span class="summary-row-label">↳ 조합행정</span><span class="summary-row-value">4건</span></div>
+    </div>
+    <div class="summary-box">
+      <div class="summary-box-header">2026년 점검 (25건 점검 → 20건 처분)</div>
+      <div class="summary-row"><span class="summary-row-label">행정지도</span><span class="summary-row-value" style="color:var(--accent2)">10건</span></div>
+      <div class="summary-row"><span class="summary-row-label">↳ 자금회계</span><span class="summary-row-value">8건</span></div>
+      <div class="summary-row"><span class="summary-row-label">↳ 계약</span><span class="summary-row-value">1건</span></div>
+      <div class="summary-row"><span class="summary-row-label">↳ 조합행정</span><span class="summary-row-value">1건</span></div>
+      <div class="summary-row"><span class="summary-row-label">시정명령</span><span class="summary-row-value" style="color:var(--accent)">7건</span></div>
+      <div class="summary-row"><span class="summary-row-label">수사의뢰</span><span class="summary-row-value" style="color:#a78bfa">1건</span></div>
+      <div class="summary-row"><span class="summary-row-label">기타</span><span class="summary-row-value">2건</span></div>
+    </div>
+  </div>
+
+  <!-- ── FULL TABLE ── -->
+  <div class="section-header">
+    <h2>전체 지적사항 상세보기</h2>
+    <div class="section-line"></div>
+    <span class="section-tag">Full Details</span>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="filterYear('all', this)">전체 (37건)</button>
+    <button class="tab-btn" onclick="filterYear('2024', this)">2024년 (21건)</button>
+    <button class="tab-btn" onclick="filterYear('2026', this)">2026년 (20건)</button>
+  </div>
+
+  <div class="filter-bar">
+    <span class="filter-label">분야</span>
+    <button class="filter-chip active-all" onclick="filterCat('all', this)">전체</button>
+    <button class="filter-chip" onclick="filterCat('finance', this)">💰 자금·회계</button>
+    <button class="filter-chip" onclick="filterCat('contract', this)">📄 용역계약</button>
+    <button class="filter-chip" onclick="filterCat('admin', this)">🏛 조합행정</button>
+    <button class="filter-chip" onclick="filterCat('info', this)">📢 정보공개</button>
+  </div>
+
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="text" class="search-input" placeholder="지적내용 검색..." oninput="searchTable(this.value)">
+  </div>
+
+  <div class="count-display">표시 중: <span id="row-count">37</span>건</div>
+
+  <div class="table-wrap">
+    <table id="main-table">
+      <thead>
+        <tr>
+          <th style="width:40px">No</th>
+          <th>분야</th>
+          <th>세부 지적내용</th>
+          <th>2024</th>
+          <th>2026</th>
+          <th>조합원 영향</th>
+        </tr>
+      </thead>
+      <tbody id="tbody">
+        <!-- rows injected by JS -->
+      </tbody>
+    </table>
+  </div>
+
+</main>
+
+<footer>
+  자료 출처: 안양시 역세권 조합운영 실태점검 결과 (2024 · 2026) &nbsp;|&nbsp; 본 페이지는 공개 자료 기반 정보 제공용입니다
+</footer>
+
+<script>
+const data = [
+  {
+    no:1, cat:"finance", catLabel:"자금·회계",
+    title:"월별 자금 입출금 세부내역 작성 우수",
+    y2024:"우수사례", y2026:"-",
+    impact:"neutral", impactLabel:"손익 무관 (장부정리)",
+    detail:"41건 중 유일한 우수사례. 단, 예산 절감과는 전혀 무관한 장부 정리 분야임.\n조합장은 이 항목만 2년째 홍보 중.",
+    repeat: false
+  },
+  {
+    no:2, cat:"finance", catLabel:"자금·회계",
+    title:"예산규모·집행액 미고려 예산 수립",
+    y2024:"행정지도", y2026:"-",
+    impact:"transparency", impactLabel:"회계 투명성 하락",
+    detail:"예산 과다 편성 및 추진 일정 미고려. 미집행 예산을 3년 전 미리 편성 운영하는 등 사업 추진 일정 고려 없는 예산 편성.",
+    repeat: false
+  },
+  {
+    no:3, cat:"finance", catLabel:"자금·회계",
+    title:"비합리적 세금비용 추산 관리처분계획",
+    y2024:"행정지도", y2026:"-",
+    impact:"transparency", impactLabel:"회계 투명성 바닥",
+    detail:"기대수익률 과다 계상으로 조합원 정보 왜곡. 조합원 정보 오인 의도적 유도 정황 존재.",
+    repeat: false
+  },
+  {
+    no:4, cat:"finance", catLabel:"자금·회계",
+    title:"원천징수세액 신고납부 미이행",
+    y2024:"행정지도", y2026:"행정지도",
+    impact:"loss", impactLabel:"이주비 혼란·회계 신뢰도 하락",
+    detail:"24~25년에도 원천징수세액 신고납부 미이행. 23년 지적에도 불구하고 24~25년 계속 미시행.",
+    repeat: true
+  },
+  {
+    no:5, cat:"finance", catLabel:"자금·회계",
+    title:"총회참석수당 원천징수 미이행",
+    y2024:"-", y2026:"시정명령",
+    impact:"transparency", impactLabel:"회계 신뢰도 하락",
+    detail:"24년 업무규정 개정 후에도 원천징수 미이행.",
+    repeat: false
+  },
+  {
+    no:6, cat:"finance", catLabel:"자금·회계",
+    title:"배당소득 원천징수세액의 사업비 계상",
+    y2024:"행정지도", y2026:"-",
+    impact:"loss", impactLabel:"조합원 손실 (법인세 등 125억 과다 계상)",
+    detail:"법인세 및 지방소득세 125억 과다 계상으로 조합원 손실로 결론날 가능성 매우 높음.",
+    repeat: false
+  },
+  {
+    no:7, cat:"finance", catLabel:"자금·회계",
+    title:"법인세·부가가치세 신고내용 일부 부적법",
+    y2024:"행정지도", y2026:"-",
+    impact:"loss", impactLabel:"회계 신뢰도 하락·조합원 손실",
+    detail:"세금 신고 시 손익 계상 부적법. 회계법인의 전문성이 의심됨.",
+    repeat: false
+  },
+  {
+    no:8, cat:"finance", catLabel:"자금·회계",
+    title:"조합임직원 퇴직급여충당부채 미계상",
+    y2024:"행정지도", y2026:"-",
+    impact:"transparency", impactLabel:"회계 신뢰도 하락",
+    detail:"기초적 퇴직금 충당 회계도 미계상. 회계법인의 전문성이 의심됨.",
+    repeat: false
+  },
+  {
+    no:9, cat:"finance", catLabel:"자금·회계",
+    title:"임직원 퇴직적립금 미구분관리",
+    y2024:"-", y2026:"행정지도",
+    impact:"transparency", impactLabel:"회계 투명성 하락",
+    detail:"23년 지적 이행 중 퇴직적립금 미구분관리.",
+    repeat: false
+  },
+  {
+    no:10, cat:"finance", catLabel:"자금·회계",
+    title:"부적정한 예산 전용",
+    y2024:"행정지도", y2026:"행정지도",
+    impact:"loss", impactLabel:"무단 지출·조합원 손실",
+    detail:"정비사업비 예비비 대의원회 의결 없이 사용. 23년 지적에도 불구하고 24년 계속 미이행.",
+    repeat: true
+  },
+  {
+    no:11, cat:"finance", catLabel:"자금·회계",
+    title:"부실한 예산편성 및 운용",
+    y2024:"행정지도", y2026:"시정명령",
+    impact:"loss", impactLabel:"조합원 손실",
+    detail:"25년에도 예산 중복 편성, 예비비 과다 편성 등. 23년 지적에도 불구하고 25년 계속 미이행.",
+    repeat: true
+  },
+  {
+    no:12, cat:"finance", catLabel:"자금·회계",
+    title:"상근임직원 인건비 예산편성·집행 주의사항",
+    y2024:"-", y2026:"행정지도",
+    impact:"loss", impactLabel:"수당 무단 지출·회계 신뢰도 하락",
+    detail:"임직원 급여·상여를 기타 인건비가 아닌 임직원별 급상여로 집행. 직원 연장근로수당 지급 조합원 보고 필요.",
+    repeat: false
+  },
+  {
+    no:13, cat:"finance", catLabel:"자금·회계",
+    title:"예산회계규정 제정 권장",
+    y2024:"행정지도", y2026:"행정지도",
+    impact:"transparency", impactLabel:"회계 투명성 하락",
+    detail:"25년에도 예산회계규정 미정비 (총회 승인 필요). 23년 지적에도 25년 계속 미이행.",
+    repeat: true
+  },
+  {
+    no:14, cat:"finance", catLabel:"자금·회계",
+    title:"부적정한 계정과목 분류",
+    y2024:"-", y2026:"행정지도",
+    impact:"loss", impactLabel:"조합원 손실",
+    detail:"업무추진비가 아닌 대의원 회의비로 임원·대의원 등에 과일, 참치 등 명절선물 지급. 23~24년 명절선물비 1,300만 원 집행.",
+    repeat: false
+  },
+  {
+    no:15, cat:"finance", catLabel:"자금·회계",
+    title:"결산보고 지연 공개",
+    y2024:"-", y2026:"행정지도",
+    impact:"transparency", impactLabel:"회계 투명성 하락",
+    detail:"23·24년 결산보고서 공개 최대 1년 7개월 지연, 대의원회 의결 최대 4개월 지연. 이사회 미의결, 총회 미승인.",
+    repeat: false
+  },
+  {
+    no:16, cat:"contract", catLabel:"용역계약",
+    title:"감정자문계약서 부재",
+    y2024:"행정지도", y2026:"-",
+    impact:"loss", impactLabel:"무단 지출·조합원 손실",
+    detail:"2018년 감정평가 자문계약서 미체결. 자문료 300만 원 무단 지출.",
+    repeat: false
+  },
+  {
+    no:17, cat:"contract", catLabel:"용역계약",
+    title:"서면계약서 미작성 [법무법인 하나]",
+    y2024:"행정지도", y2026:"-",
+    impact:"loss", impactLabel:"무단 지출·조합원 손실",
+    detail:"하나 법무법인에 계약서 없이 450만 원 자문료 지급.",
+    repeat: false
+  },
+  {
+    no:18, cat:"contract", catLabel:"용역계약",
+    title:"서면계약서 미작성 [총회 사회자]",
+    y2024:"-", y2026:"행정지도",
+    impact:"loss", impactLabel:"무단 지출·조합원 손실",
+    detail:"2회 총 650만 원 계약서 미작성 후 지급. 23년 지적에도 불구하고 25년 계속 미이행.",
+    repeat: true
+  },
+  {
+    no:19, cat:"admin", catLabel:"조합행정",
+    title:"대의원회에서의 감정평가업체 선정",
+    y2024:"행정지도", y2026:"-",
+    impact:"rights", impactLabel:"조합원 권리 박탈",
+    detail:"감정평가업체 선정은 총회 의결 사항임에도 대의원회에서 처리.",
+    repeat: false
+  },
+  {
+    no:20, cat:"admin", catLabel:"조합행정",
+    title:"이사회 결의 없는 대의원회 상정",
+    y2024:"-", y2026:"시정명령",
+    impact:"transparency", impactLabel:"행정 투명성 결여",
+    detail:"일부 안건 이사회 결의 누락 후 대의원 의결.",
+    repeat: false
+  },
+  {
+    no:21, cat:"admin", catLabel:"조합행정",
+    title:"총회 결의 없는 예산외 계약 체결",
+    y2024:"행정지도", y2026:"-",
+    impact:"rights", impactLabel:"조합원 권리 박탈·손실",
+    detail:"총회 의결 없이 8건, 691백만 원 계약 체결.",
+    repeat: false
+  },
+  {
+    no:22, cat:"admin", catLabel:"조합행정",
+    title:"종후자산 재평가 실시 절차 미비",
+    y2024:"-", y2026:"시정명령",
+    impact:"loss", impactLabel:"조합원 손실",
+    detail:"종후자산 재평가로 변동된 관리처분계획의 중대한 변경은 총회 의결 필요.",
+    repeat: false
+  },
+  {
+    no:23, cat:"admin", catLabel:"조합행정",
+    title:"종후자산 재평가 감정평가법인 선정·계약절차 부적법",
+    y2024:"-", y2026:"시정명령",
+    impact:"loss", impactLabel:"조합원 484억 추가 부담",
+    detail:"종후자산 재평가 및 감정평가업체 재선정 절차적 미비 등 재발하지 않도록 할 것. 조합원 484억 추가 부담 발생.",
+    repeat: false
+  },
+  {
+    no:24, cat:"admin", catLabel:"조합행정",
+    title:"정비사업계약업무처리기준 위반",
+    y2024:"시정명령", y2026:"-",
+    impact:"rights", impactLabel:"조합원 권리 박탈·손실",
+    detail:"대의원회 의결 없이 법무법인 하나와 23건, 125백만 원 계약 체결.",
+    repeat: false
+  },
+  {
+    no:25, cat:"admin", catLabel:"조합행정",
+    title:"예산항목 '기타용역비' 수립 부적정",
+    y2024:"행정지도", y2026:"-",
+    impact:"transparency", impactLabel:"회계 투명성 하락",
+    detail:"예비비와 별도로 기타용역비 설정 운영. 도정법 45조 취지 위반.",
+    repeat: false
+  },
+  {
+    no:26, cat:"admin", catLabel:"조합행정",
+    title:"위법한 임·대의원 입후보 자격 제한",
+    y2024:"시정명령", y2026:"-",
+    impact:"rights", impactLabel:"조합원 권리 박탈",
+    detail:"임원·대의원 후보 자격을 조합 설립에 동의한 자로 한정. 조합원의 피선거권을 현저히 침해.",
+    repeat: false
+  },
+  {
+    no:27, cat:"admin", catLabel:"조합행정",
+    title:"보수규정의 총회 미인준",
+    y2024:"시정명령·행정지도", y2026:"-",
+    impact:"rights", impactLabel:"조합원 권리 박탈·손실",
+    detail:"보수규정에 대해 대의원회 의결로 개정. 총회 의결 필요.",
+    repeat: false
+  },
+  {
+    no:28, cat:"admin", catLabel:"조합행정",
+    title:"출근부·업무일지 등 부재",
+    y2024:"행정지도", y2026:"-",
+    impact:"neutral", impactLabel:"일상적 근무태만",
+    detail:"출근부, 근무상황부, 업무일지 등 미기재·미작성 등으로 근무태만 비일비재.",
+    repeat: false
+  },
+  {
+    no:29, cat:"admin", catLabel:"조합행정",
+    title:"이사회 의결에 의한 정관 변경 부당성",
+    y2024:"시정명령·행정지도", y2026:"-",
+    impact:"neutral", impactLabel:"조합정관 전반적 개정 필요",
+    detail:"조합 집행부의 자의적 조합운영에 경종. 조합 정관 제8조 관련 조합규정 개정 필요.",
+    repeat: false
+  },
+  {
+    no:30, cat:"admin", catLabel:"조합행정",
+    title:"개정 필요한 내부규정",
+    y2024:"-", y2026:"시정명령",
+    impact:"rights", impactLabel:"조합원 권리 박탈",
+    detail:"정관, 업무규정, 선관위 규정 개정 필요. 대의원 선임은 총회 권한. 선관위 업무를 조합이 수행 시 공정성 의심.",
+    repeat: false
+  },
+  {
+    no:31, cat:"admin", catLabel:"조합행정",
+    title:"선관위와 협의되지 않은 투표용지 사용",
+    y2024:"-", y2026:"행정지도",
+    impact:"rights", impactLabel:"조합원 권리 박탈",
+    detail:"조합이 선관위와 협의되지 않은 투표용지 무단 사용으로 선거 공정성 및 객관성 저해.",
+    repeat: false
+  },
+  {
+    no:32, cat:"admin", catLabel:"조합행정",
+    title:"이사회 속기록·녹음 또는 영상자료 미작성",
+    y2024:"행정지도", y2026:"-",
+    impact:"neutral", impactLabel:"도시정비법 125조 위반",
+    detail:"조합 설립 이후 속기록, 녹음 또는 영상자료 미작성. 도시정비법 125조 위반에도 행정지도에 그침.",
+    repeat: false
+  },
+  {
+    no:33, cat:"info", catLabel:"정보공개",
+    title:"인터넷 지연공개",
+    y2024:"행정지도", y2026:"-",
+    impact:"rights", impactLabel:"조합원 알 권리 제한",
+    detail:"조합 정관 변경 등 4개 자료 5~15일 지연 공개. 도시정비법 123조 위반.",
+    repeat: false
+  },
+  {
+    no:34, cat:"info", catLabel:"정보공개",
+    title:"정보공개 관련 규정 미비",
+    y2024:"-", y2026:"시정명령·행정지도",
+    impact:"loss", impactLabel:"조합원 손실",
+    detail:"도시정비법·조합 정관 미준수. 정보공개 복사비용 징구 부적정. 제공자료 반납 각서 징구로 청구권 제한.",
+    repeat: false
+  },
+  {
+    no:35, cat:"info", catLabel:"정보공개",
+    title:"종후자산 재평가 정보공개 지연",
+    y2024:"-", y2026:"기타(정보공개)",
+    impact:"loss", impactLabel:"조합원 손실 막대",
+    detail:"조합측 지연공개로 종후자산 감정평가 안양시 승인 필요 여부에 대한 조합원 오인 충분.\n적법 정보공개 시 종후 재평가 미실시 가능, 조합원 추가 분담금 미발생 가능, 법인세 과다계상 문제 미발생 가능.",
+    repeat: false
+  },
+  {
+    no:36, cat:"info", catLabel:"정보공개",
+    title:"공사책임자 인적사항 공개 위반",
+    y2024:"-", y2026:"기타(정보공개)",
+    impact:"neutral", impactLabel:"조합원 손익 무관",
+    detail:"공사 책임자 현장대리인 인적사항이 게시물에 포함되어 도정법 및 개인정보보호법 위반 여지.",
+    repeat: false
+  },
+  {
+    no:37, cat:"info", catLabel:"정보공개",
+    title:"정보공개 위반 — 수사의뢰",
+    y2024:"-", y2026:"수사의뢰",
+    impact:"loss", impactLabel:"조합원 손실 막대",
+    detail:"도시정비법 위반으로 수사의뢰.\n• 공문서 3건 지연공개\n• 의사록 등 4건 지연공개, 2건 미공개\n• 조합 정관 변경 지연공개 1건\n• 회계자료 30건 지연공개, 2건 미공개\n일상적이고 상습적인 정보 미공개·지연공개 등 법 위반.",
+    repeat: false
+  },
+];
+
+function getActionBadge(txt) {
+  if (!txt || txt === '-') return `<span class="act-none">—</span>`;
+  if (txt.includes('우수')) return `<span class="action-badge act-excellent">✓ ${txt}</span>`;
+  if (txt.includes('수사')) return `<span class="action-badge act-invest">🔍 ${txt}</span>`;
+  if (txt.includes('시정명령')) return `<span class="action-badge act-order">${txt}</span>`;
+  if (txt.includes('행정지도')) return `<span class="action-badge act-guide">${txt}</span>`;
+  if (txt.includes('기타')) return `<span class="action-badge act-other">${txt}</span>`;
+  return `<span class="act-none">${txt}</span>`;
+}
+
+function getImpactBadge(row) {
+  if (row.impact === 'loss') return `<span class="impact-badge impact-loss">⚠ ${row.impactLabel}</span>`;
+  if (row.impact === 'rights') return `<span class="impact-badge impact-rights">⛔ ${row.impactLabel}</span>`;
+  if (row.impact === 'transparency') return `<span class="impact-badge impact-transparency">📊 ${row.impactLabel}</span>`;
+  return `<span class="impact-neutral">${row.impactLabel}</span>`;
+}
+
+function getCatBadge(row) {
+  const cls = {finance:'cat-finance', contract:'cat-contract', admin:'cat-admin', info:'cat-info'};
+  return `<span class="category-pill ${cls[row.cat]}">${row.catLabel}</span>`;
+}
+
+function renderRows(rows) {
+  const tbody = document.getElementById('tbody');
+  tbody.innerHTML = '';
+  rows.forEach((r, i) => {
+    const repeatBadge = r.repeat ? `<span class="repeat-icon">반복</span>` : '';
+    const tr = document.createElement('tr');
+    tr.dataset.cat = r.cat;
+    tr.dataset.year = r.y2024 !== '-' && r.y2026 !== '-' ? 'both' : (r.y2024 !== '-' ? '2024' : '2026');
+    tr.innerHTML = `
+      <td class="td-num">${r.no}</td>
+      <td>${getCatBadge(r)}</td>
+      <td class="detail-text">${r.title}${repeatBadge}</td>
+      <td>${getActionBadge(r.y2024)}</td>
+      <td>${getActionBadge(r.y2026)}</td>
+      <td>${getImpactBadge(r)}</td>
+    `;
+    tr.addEventListener('click', () => toggleExpand(r.no, r.detail, tr));
+
+    const expTr = document.createElement('tr');
+    expTr.className = 'expand-row';
+    expTr.id = `exp-${r.no}`;
+    expTr.innerHTML = `<td colspan="6"><div class="expand-content"><div class="expand-inner">${r.detail.replace(/\n/g,'<br>')}</div></div></td>`;
+
+    tbody.appendChild(tr);
+    tbody.appendChild(expTr);
+  });
+  updateCount();
+}
+
+function toggleExpand(no, detail, tr) {
+  const expRow = document.getElementById(`exp-${no}`);
+  const isOpen = expRow.classList.contains('open');
+  document.querySelectorAll('.expand-row.open').forEach(r => r.classList.remove('open'));
+  if (!isOpen) expRow.classList.add('open');
+}
+
+let currentYear = 'all';
+let currentCat = 'all';
+let currentSearch = '';
+
+function applyFilters() {
+  const rows = document.querySelectorAll('#tbody tr[data-cat]');
+  let visible = 0;
+  rows.forEach(tr => {
+    const cat = tr.dataset.cat;
+    const year = tr.dataset.year;
+    const text = tr.textContent.toLowerCase();
+    const yearOk = currentYear === 'all' || year === currentYear || year === 'both';
+    const catOk = currentCat === 'all' || cat === currentCat;
+    const searchOk = !currentSearch || text.includes(currentSearch.toLowerCase());
+    const show = yearOk && catOk && searchOk;
+    tr.classList.toggle('hidden', !show);
+    const expId = tr.querySelector('td.td-num')?.textContent;
+    const expRow = document.getElementById(`exp-${expId?.trim()}`);
+    if (expRow && !show) expRow.classList.remove('open');
+    if (show) visible++;
+  });
+  document.getElementById('row-count').textContent = visible;
+}
+
+function filterYear(y, btn) {
+  currentYear = y;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+
+function filterCat(cat, btn) {
+  currentCat = cat;
+  const map = { all:'active-all', finance:'active-finance', contract:'active-contract', admin:'active-admin', info:'active-info' };
+  document.querySelectorAll('.filter-chip').forEach(b => {
+    b.className = 'filter-chip';
+  });
+  btn.className = `filter-chip ${map[cat]}`;
+  applyFilters();
+}
+
+function searchTable(val) {
+  currentSearch = val;
+  applyFilters();
+}
+
+function updateCount() {
+  const visible = document.querySelectorAll('#tbody tr[data-cat]:not(.hidden)').length;
+  document.getElementById('row-count').textContent = visible;
+}
+
+renderRows(data);
+</script>
+</body>
+</html>
