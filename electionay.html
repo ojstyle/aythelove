@@ -349,7 +349,7 @@
 
     <script>
         // --- Gemini API Setup ---
-        const opiKey = "AIzaSyAXgkpPyv4gWZVifH2cMYSV_1Bq2Zlfjoo"; // API Key provided by runtime environment
+        const apiKey = "AIzaSyAXgkpPyv4gWZVifH2cMYSV_1Bq2Zlfjoo"; // API Key provided by runtime environment
         
         async function fetchGeminiWithRetry(prompt, maxRetries = 5) {
             const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
