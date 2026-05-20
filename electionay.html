@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6월 이사·감사 선거 승리 전략 대시보드</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Noto Sans KR', sans-serif; background-color: #f8fafc; color: #0f172a; }
+        /* Chart Container Styling - Mandatory Requirements */
+        .chart-container { position: relative; width: 100%; max-width: 700px; margin-left: auto; margin-right: auto; height: 350px; max-height: 400px; }
+        @media (max-width: 768px) { .chart-container { height: 280px; } }
+        /* Tab Transitions */
+        .tab-content { display: none; opacity: 0; transition: opacity 0.4s ease-in-out; }
+        .tab-content.active { display: block; opacity: 1; }
+        /* Number Card Hover */
+        .num-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); border-color: #3b82f6; }
+        .num-card { transition: all 0.3s ease; }
+        /* Loading Spinner */
+        .loader { border: 3px solid #f3f3f3; border-top: 3px solid #3b82f6; border-radius: 50%; width: 20px; height: 20px; animation: spin 1s linear infinite; display: inline-block; vertical-align: middle; margin-right: 8px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body class="flex flex-col md:flex-row min-h-screen">
+
+    <!-- Sidebar Navigation -->
+    <nav class="w-full md:w-64 bg-slate-900 text-white flex flex-col shadow-xl z-10 md:h-screen md:sticky md:top-0">
+        <div class="p-6 bg-blue-900 border-b border-slate-700">
+            <h1 class="text-xl font-bold leading-tight">6월 총회 승리 전략<br><span class="text-blue-300 text-sm font-medium">조합 정상화 프로젝트</span></h1>
+        </div>
+        <div class="flex flex-row md:flex-col overflow-x-auto md:overflow-y-auto w-full flex-grow" id="nav-menu">
+            <button class="nav-btn w-full text-left px-6 py-4 hover:bg-slate-800 focus:outline-none border-l-4 border-blue-500 bg-slate-800 font-bold whitespace-nowrap md:whitespace-normal" data-target="sec-overview">📊 1. 목표 및 판세</button>
+            <button class="nav-btn w-full text-left px-6 py-4 hover:bg-slate-800 focus:outline-none border-l-4 border-transparent text-slate-300 whitespace-nowrap md:whitespace-normal" data-target="sec-frame">⚔️ 2. 핵심 프레임</button>
+            <button class="nav-btn w-full text-left px-6 py-4 hover:bg-slate-800 focus:outline-none border-l-4 border-transparent text-slate-300 whitespace-nowrap md:whitespace-normal" data-target="sec-voting">🎯 3. 연쇄 투표 전략</button>
+            <button class="nav-btn w-full text-left px-6 py-4 hover:bg-slate-800 focus:outline-none border-l-4 border-transparent text-slate-300 whitespace-nowrap md:whitespace-normal" data-target="sec-platform">📱 4. 플랫폼 및 홍보</button>
+            <button class="nav-btn w-full text-left px-6 py-4 hover:bg-slate-800 focus:outline-none border-l-4 border-transparent text-slate-300 whitespace-nowrap md:whitespace-normal" data-target="sec-outreach">🤝 5. 조합원 스킨십</button>
+        </div>
+        <div class="p-6 mt-auto hidden md:block">
+            <div class="bg-slate-800 rounded-lg p-4 text-center">
+                <p class="text-xs text-slate-400">D-DAY (6월 중)</p>
+                <p class="text-lg font-bold text-emerald-400 mt-1">필승(必勝) 5인 전원</p>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 p-4 md:p-8 overflow-y-auto w-full">
+        <div class="max-w-5xl mx-auto">
+
+            <!-- Section 1: Overview -->
+            <section id="sec-overview" class="tab-content active">
+                <header class="mb-8">
+                    <h2 class="text-3xl font-black text-slate-800 tracking-tight">선거 목표 및 환경 분석</h2>
+                    <p class="text-slate-600 mt-2 text-lg">11명의 후보 중 9명을 선출(2명 낙선)하는 이번 선거의 핵심 승리 조건을 분석합니다.</p>
+                </header>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 text-center">
+                        <div class="text-4xl mb-2">🎯</div>
+                        <h3 class="text-slate-500 font-bold text-sm">핵심 목표</h3>
+                        <p class="text-2xl font-black text-blue-700 mt-1">우리측 5명 전원 당선</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 text-center">
+                        <div class="text-4xl mb-2">✂️</div>
+                        <h3 class="text-slate-500 font-bold text-sm">부가 목표</h3>
+                        <p class="text-2xl font-black text-rose-600 mt-1">상대측 핵심 2명 탈락</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 text-center">
+                        <div class="text-4xl mb-2">⚠️</div>
+                        <h3 class="text-slate-500 font-bold text-sm">극복 과제</h3>
+                        <p class="text-xl font-bold text-slate-800 mt-1">"비대위 = 공사 지연" 불안감</p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="text-xl font-bold text-slate-800 mb-4 border-b pb-2">선거 환경 및 대응 전략 요약</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 h-6 w-6 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-sm mt-0.5">1</span>
+                            <div class="ml-3">
+                                <h4 class="font-bold text-slate-800">프레임의 전환이 필수적</h4>
+                                <p class="text-slate-600 text-sm mt-1">상대방이 씌운 '공사 지연 프레임'을 '무능한 이사회가 공사 중단을 부른다'는 논리로 정면 돌파해야 합니다.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 h-6 w-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-sm mt-0.5">2</span>
+                            <div class="ml-3">
+                                <h4 class="font-bold text-slate-800">기호 연번(4~8번)의 절대적 유리함</h4>
+                                <p class="text-slate-600 text-sm mt-1">복잡한 선거에서 '4,5,6,7,8'이라는 연속된 숫자는 조합원들에게 가장 직관적인 투표 가이드라인이 됩니다.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="flex-shrink-0 h-6 w-6 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center font-bold text-sm mt-0.5">3</span>
+                            <div class="ml-3">
+                                <h4 class="font-bold text-slate-800">대의원회 독점 구조의 돌파</h4>
+                                <p class="text-slate-600 text-sm mt-1">기존 세력이 장악한 대의원회를 넘어서기 위해 플랫폼과 직접 소통을 통한 일반 조합원 여론전이 핵심 승부처입니다.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 2: Frame -->
+            <section id="sec-frame" class="tab-content">
+                <header class="mb-8">
+                    <h2 class="text-3xl font-black text-slate-800 tracking-tight">핵심 프레임 설정</h2>
+                    <p class="text-slate-600 mt-2 text-lg">"실력파 원팀 vs 무능한 불신임팀" - 역량과 투명성의 완벽한 대비를 통해 유권자를 설득합니다.</p>
+                </header>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Left: Text Comparison -->
+                    <div class="flex flex-col justify-center space-y-6">
+                        <div class="bg-emerald-50 border-l-4 border-emerald-500 p-5 rounded-r-lg">
+                            <div class="flex justify-between items-center mb-2">
+                                <h3 class="text-lg font-bold text-emerald-800">실력파 원팀 (우리 후보)</h3>
+                                <span class="bg-emerald-200 text-emerald-800 text-xs px-2 py-1 rounded font-bold">강점</span>
+                            </div>
+                            <ul class="text-emerald-900 text-sm space-y-2 list-disc ml-4">
+                                <li><strong>실전형 전문가:</strong> 공사, 마케팅, 노조, 공기업, 현직 대표 등 재개발 실무 완벽 이해</li>
+                                <li><strong>투명성:</strong> "성과금 제로 서약"으로 조합원 이익 최우선 보장</li>
+                                <li><strong>속도 논리:</strong> 각 분야 전문가의 철저한 검증이 위법/지연을 막고 속도를 냄</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-center my-2 text-slate-400 font-black text-xl text-center">VS</div>
+
+                        <div class="bg-rose-50 border-l-4 border-rose-500 p-5 rounded-r-lg">
+                            <div class="flex justify-between items-center mb-2">
+                                <h3 class="text-lg font-bold text-rose-800">무능한 불신임팀 (상대측)</h3>
+                                <span class="bg-rose-200 text-rose-800 text-xs px-2 py-1 rounded font-bold">약점</span>
+                            </div>
+                            <ul class="text-rose-900 text-sm space-y-2 list-disc ml-4">
+                                <li><strong>서류상 스펙:</strong> 박사 학위 등 겉치레, 실제 현장 실무 경험 부재</li>
+                                <li><strong>도덕성 결여:</strong> 의사록 가짜 서명 의혹 및 불신임 전력자 다수 포함</li>
+                                <li><strong>거수기 이사회:</strong> 거수기 역할은 결국 위법 논란을 낳아 최악의 공사 중단 초래</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Right: Radar Chart -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col justify-center items-center">
+                        <h3 class="text-center font-bold text-slate-700 mb-4">후보진 역량 비교 분석</h3>
+                        <div class="chart-container">
+                            <canvas id="radarChart"></canvas>
+                        </div>
+                        <p class="text-xs text-slate-500 mt-4 text-center">※ 자체 분석 기준: 전문성, 투명성, 속도, 도덕성, 소통 의지</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Voting Strategy -->
+            <section id="sec-voting" class="tab-content">
+                <header class="mb-8">
+                    <h2 class="text-3xl font-black text-slate-800 tracking-tight">기호 프리미엄 활용: 연쇄 투표</h2>
+                    <p class="text-slate-600 mt-2 text-lg">가장 강력한 무기인 연속된 기호(4~8번)를 시각적으로 브랜딩하여 표 분산을 막습니다.</p>
+                </header>
+
+                <div class="bg-blue-600 rounded-2xl p-8 text-center text-white mb-8 shadow-lg">
+                    <h3 class="text-2xl font-black mb-6">"조합의 정상화, 4, 5, 6, 7, 8번이 이어달리겠습니다!"</h3>
+                    
+                    <!-- Visual Voting Block -->
+                    <div class="flex flex-wrap justify-center gap-4 mb-8">
+                        <div class="num-card bg-white text-blue-800 w-16 h-20 md:w-24 md:h-32 rounded-xl flex flex-col items-center justify-center border-4 border-transparent font-black shadow-md cursor-pointer">
+                            <span class="text-xs md:text-sm text-slate-400 font-bold mb-1">기호</span>
+                            <span class="text-3xl md:text-5xl">4</span>
+                        </div>
+                        <div class="num-card bg-white text-blue-800 w-16 h-20 md:w-24 md:h-32 rounded-xl flex flex-col items-center justify-center border-4 border-transparent font-black shadow-md cursor-pointer">
+                            <span class="text-xs md:text-sm text-slate-400 font-bold mb-1">기호</span>
+                            <span class="text-3xl md:text-5xl">5</span>
+                        </div>
+                        <div class="num-card bg-white text-blue-800 w-16 h-20 md:w-24 md:h-32 rounded-xl flex flex-col items-center justify-center border-4 border-transparent font-black shadow-md cursor-pointer">
+                            <span class="text-xs md:text-sm text-slate-400 font-bold mb-1">기호</span>
+                            <span class="text-3xl md:text-5xl">6</span>
+                        </div>
+                        <div class="num-card bg-white text-blue-800 w-16 h-20 md:w-24 md:h-32 rounded-xl flex flex-col items-center justify-center border-4 border-transparent font-black shadow-md cursor-pointer">
+                            <span class="text-xs md:text-sm text-slate-400 font-bold mb-1">기호</span>
+                            <span class="text-3xl md:text-5xl">7</span>
+                        </div>
+                        <div class="num-card bg-white text-blue-800 w-16 h-20 md:w-24 md:h-32 rounded-xl flex flex-col items-center justify-center border-4 border-transparent font-black shadow-md cursor-pointer">
+                            <span class="text-xs md:text-sm text-slate-400 font-bold mb-1">기호</span>
+                            <span class="text-3xl md:text-5xl">8</span>
+                        </div>
+                        <div class="flex items-center justify-center px-2 text-2xl font-bold">+</div>
+                        <div class="num-card bg-emerald-400 text-white w-20 h-20 md:w-28 md:h-32 rounded-xl flex flex-col items-center justify-center border-4 border-emerald-300 font-black shadow-md cursor-pointer">
+                            <span class="text-xs md:text-sm font-bold mb-1">감사</span>
+                            <span class="text-xl md:text-2xl mt-1">성시찬</span>
+                        </div>
+                    </div>
+
+                    <div class="inline-block bg-blue-800 rounded-full px-6 py-3 font-bold text-blue-100 border border-blue-500">
+                        핵심 캐치프레이즈: "공사 속도는 올리고(+), 성과금은 없애고(-), 투명한 이사회 4,5,6,7,8!"
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl border border-slate-200">
+                    <h4 class="font-bold text-slate-800 mb-3 border-l-4 border-blue-500 pl-3">적용 지침</h4>
+                    <p class="text-slate-600 text-sm">홍보물, 웹페이지, 카드뉴스 등 모든 매체에 '4~8번 그리고 성시찬'을 <strong>하나의 로고(CI)</strong>처럼 디자인하여 시각적으로 각인시켜야 합니다. 조합원들이 개별 후보를 외우는 수고를 덜어주고 세트 투표를 유도합니다.</p>
+                </div>
+            </section>
+
+            <!-- Section 4: Platform & PR -->
+            <section id="sec-platform" class="tab-content">
+                <header class="mb-8">
+                    <h2 class="text-3xl font-black text-slate-800 tracking-tight">플랫폼 및 홍보 전략</h2>
+                    <p class="text-slate-600 mt-2 text-lg">기존의 낡은 방식을 넘어선, '데이터 기반'의 세련되고 스마트한 디지털 캠페인을 전개합니다.</p>
+                </header>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                    <!-- Platform Strategy -->
+                    <div>
+                        <h3 class="text-xl font-bold text-blue-700 mb-4 flex items-center">
+                            <span class="text-2xl mr-2">💻</span> 1. 자체 플랫폼 구축 (Web)
+                        </h3>
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm relative overflow-hidden h-full">
+                            <!-- Decor block -->
+                            <div class="absolute top-0 right-0 w-16 h-16 bg-blue-50 rounded-bl-full z-0"></div>
+                            
+                            <div class="relative z-10">
+                                <h4 class="font-bold text-slate-800 mb-2">후보자 연합 스마트 랜딩페이지</h4>
+                                <ul class="space-y-3 text-sm text-slate-600 mt-4">
+                                    <li class="flex items-start">
+                                        <span class="text-blue-500 mr-2 mt-0.5">✔️</span>
+                                        <span><strong>공약 Finder:</strong> 조합원이 관심 있는 키워드(분담금, 공사기간 등)를 클릭하면 맞춤형 공약과 해결책을 즉시 보여주는 인터랙티브 UI 구현</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-blue-500 mr-2 mt-0.5">✔️</span>
+                                        <span><strong>과거의 성공 사례 강조:</strong> 대출 상담 예약, 정보공개청구 시스템 등 우리가 <strong>직접 개발/지원했던 기술적 역량</strong>을 증명하며 "말이 아닌 실력" 어필</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-blue-500 mr-2 mt-0.5">✔️</span>
+                                        <span><strong>지원/투표 가이드라인:</strong> 모바일에서 클릭 한 번으로 투표 방법 안내 및 지지선언 참여 기능 제공</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PR Strategy -->
+                    <div>
+                        <h3 class="text-xl font-bold text-emerald-700 mb-4 flex items-center">
+                            <span class="text-2xl mr-2">📢</span> 2. 고품격 마케팅 & 팩트체크
+                        </h3>
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm h-full">
+                            <h4 class="font-bold text-slate-800 mb-2">고품격 비주얼 & 데이터 카드뉴스</h4>
+                            <div class="space-y-4 text-sm text-slate-600 mt-4">
+                                <div class="bg-slate-50 p-3 rounded border border-slate-100">
+                                    <strong class="text-slate-800 block mb-1">📸 프로필 디렉팅: "일하는 전문가"</strong>
+                                    <p>단순 정장 컷 금지. 도면을 검토하거나 기획안을 논의하는 등 현장감 있고 전문성이 돋보이는 콘셉트 촬영 진행.</p>
+                                </div>
+                                <div class="bg-rose-50 p-3 rounded border border-rose-100">
+                                    <strong class="text-rose-800 block mb-1">📈 감정 배제, '숫자' 기반 팩트체크</strong>
+                                    <p>기존 집행부의 비리 의혹, 공사비 문제를 감정적 비난이 아닌 <span class="bg-yellow-200 font-bold px-1">객관적 데이터와 근거 자료</span>로 깔끔하게 정리하여 시리즈 카드뉴스로 연재.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEW: AI PR Generator Powered by Gemini -->
+                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-xl border border-blue-200 shadow-sm">
+                    <h3 class="text-xl font-bold text-indigo-800 mb-2 flex items-center">
+                        <span class="text-2xl mr-2">🤖</span> AI 맞춤형 홍보 문구 생성기
+                    </h3>
+                    <p class="text-sm text-indigo-600 mb-4">대상 유권자의 성향이나 우려사항을 입력하면, 우리의 선거 전략(4~8번 기호, 투명성, 전문성)이 반영된 <strong>카카오톡/SMS 홍보용 스크립트</strong>를 Gemini AI가 즉시 작성해 드립니다.</p>
+                    
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <input type="text" id="pr-target-input" placeholder="예: 공사 지연을 가장 걱정하는 40대 조합원" class="flex-1 px-4 py-3 rounded-lg border border-indigo-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-inner">
+                        <button id="btn-generate-pr" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center whitespace-nowrap shadow-md">
+                            ✨ 문구 생성하기
+                        </button>
+                    </div>
+                    
+                    <div id="pr-result-container" class="mt-4 hidden">
+                        <div class="bg-white p-4 rounded-lg border border-indigo-100 shadow-inner relative">
+                            <span class="absolute top-2 right-2 text-xs bg-indigo-100 text-indigo-800 px-2 py-1 rounded font-bold">생성된 스크립트</span>
+                            <p id="pr-result-text" class="text-slate-700 whitespace-pre-wrap text-sm leading-relaxed mt-4"></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: Outreach -->
+            <section id="sec-outreach" class="tab-content">
+                <header class="mb-8">
+                    <h2 class="text-3xl font-black text-slate-800 tracking-tight">대의원회 한계 극복: 조합원 스킨십</h2>
+                    <p class="text-slate-600 mt-2 text-lg">99% 기울어진 대의원회를 견제하기 위해, 일반 조합원들과의 직접적인 소통망을 구축합니다.</p>
+                </header>
+
+                <div class="flex flex-col lg:flex-row gap-8 mb-8">
+                    <!-- Left: Why we need it -->
+                    <div class="w-full lg:w-1/3">
+                        <div class="bg-slate-800 p-6 rounded-xl text-white h-full flex flex-col justify-center shadow-md">
+                            <h3 class="text-xl font-bold mb-4 text-amber-400">왜 직접 소통인가?</h3>
+                            <div class="chart-container" style="height: 200px;">
+                                <canvas id="pieChart"></canvas>
+                            </div>
+                            <p class="text-sm text-slate-300 mt-4 text-center">현재 대의원회 지형도<br>(이사회에서 안건이 막힐 우려 존재)</p>
+                        </div>
+                    </div>
+
+                    <!-- Right: Action Plan -->
+                    <div class="w-full lg:w-2/3 space-y-4">
+                        <div class="bg-white p-6 rounded-xl border-l-4 border-blue-500 shadow-sm flex items-start">
+                            <div class="text-3xl mr-4 mt-1">📱</div>
+                            <div>
+                                <h4 class="text-lg font-bold text-slate-800">오픈 이사회 & 정기 브리핑 약속</h4>
+                                <p class="text-slate-600 mt-2"><strong>공약화:</strong> "이사회 핵심 안건 및 결정 사항을 조합원들에게 카톡/문자로 24시간 내 직접 보고하겠습니다." 밀실 행정을 타파하는 투명성 확보의 핵심 무기입니다.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-xl border-l-4 border-emerald-500 shadow-sm flex items-start">
+                            <div class="text-3xl mr-4 mt-1">🏃‍♂️</div>
+                            <div>
+                                <h4 class="text-lg font-bold text-slate-800">찾아가는 읍소 전략 (현장 스킨십)</h4>
+                                <p class="text-slate-600 mt-2">전화와 웹페이지를 넘어서는 대면 접촉. <strong>핵심 메시지:</strong> "대의원회가 한쪽으로 기울어 있어 브레이크가 고장 난 자동차와 같습니다. 소중한 한 표로 이사회에 브레이크를 달아주십시오."</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEW: AI Q&A Generator Powered by Gemini -->
+                <div class="bg-gradient-to-r from-emerald-50 to-teal-50 p-6 rounded-xl border border-emerald-200 shadow-sm">
+                    <h3 class="text-xl font-bold text-emerald-800 mb-2 flex items-center">
+                        <span class="text-2xl mr-2">🛡️</span> AI 현장 대응 Q&A 가이드
+                    </h3>
+                    <p class="text-sm text-emerald-600 mb-4">현장 스킨십 중 <strong>반대측 지지자나 부정적인 조합원의 까다로운 질문</strong>을 받았을 때, 감정적이지 않고 우리의 핵심 논리(전문가 검증이 속도를 냄)로 방어할 수 있는 모범 답변을 Gemini AI가 제안합니다.</p>
+                    
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <input type="text" id="qa-question-input" placeholder="예: 비대위 출신 이사들이 들어가면 결국 사사건건 반대해서 재개발만 늦춰지는 거 아닙니까?" class="flex-1 px-4 py-3 rounded-lg border border-emerald-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 shadow-inner">
+                        <button id="btn-generate-qa" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center whitespace-nowrap shadow-md">
+                            ✨ 대응 논리 생성하기
+                        </button>
+                    </div>
+                    
+                    <div id="qa-result-container" class="mt-4 hidden">
+                        <div class="bg-white p-4 rounded-lg border border-emerald-100 shadow-inner relative">
+                            <span class="absolute top-2 right-2 text-xs bg-emerald-100 text-emerald-800 px-2 py-1 rounded font-bold">추천 대응 스크립트</span>
+                            <p id="qa-result-text" class="text-slate-700 whitespace-pre-wrap text-sm leading-relaxed mt-4"></p>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+        </div>
+    </main>
+
+    <script>
+        // --- Gemini API Setup ---
+        const apiKey = ""; // API Key provided by runtime environment
+        
+        async function fetchGeminiWithRetry(prompt, maxRetries = 5) {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            const payload = {
+                contents: [{ parts: [{ text: prompt }] }]
+            };
+
+            for (let i = 0; i < maxRetries; i++) {
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const result = await response.json();
+                    return result.candidates?.[0]?.content?.parts?.[0]?.text || "결과를 생성하지 못했습니다.";
+                } catch (error) {
+                    if (i === maxRetries - 1) {
+                        return "시스템 오류가 발생했습니다. 잠시 후 다시 시도해주세요. (API 호출 실패)";
+                    }
+                    // Exponential backoff: 1s, 2s, 4s, 8s, 16s
+                    await new Promise(resolve => setTimeout(resolve, Math.pow(2, i) * 1000));
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Navigation Logic ---
+            const navButtons = document.querySelectorAll('.nav-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            function switchTab(targetId) {
+                navButtons.forEach(btn => {
+                    if (btn.dataset.target === targetId) {
+                        btn.classList.add('border-blue-500', 'bg-slate-800', 'text-white', 'font-bold');
+                        btn.classList.remove('border-transparent', 'text-slate-300');
+                    } else {
+                        btn.classList.remove('border-blue-500', 'bg-slate-800', 'text-white', 'font-bold');
+                        btn.classList.add('border-transparent', 'text-slate-300');
+                    }
+                });
+
+                tabContents.forEach(content => {
+                    if (content.id === targetId) {
+                        content.classList.add('active');
+                    } else {
+                        content.classList.remove('active');
+                    }
+                });
+            }
+
+            navButtons.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    switchTab(e.currentTarget.dataset.target);
+                });
+            });
+
+            // --- Gemini API Interactivity: PR Message Generator ---
+            const btnGeneratePR = document.getElementById('btn-generate-pr');
+            const prTargetInput = document.getElementById('pr-target-input');
+            const prResultContainer = document.getElementById('pr-result-container');
+            const prResultText = document.getElementById('pr-result-text');
+
+            btnGeneratePR.addEventListener('click', async () => {
+                const targetAudience = prTargetInput.value.trim() || "일반 조합원";
+                
+                // Set loading state
+                const originalBtnText = btnGeneratePR.innerHTML;
+                btnGeneratePR.innerHTML = '<span class="loader"></span> 생성 중...';
+                btnGeneratePR.disabled = true;
+                prResultContainer.classList.add('hidden');
+
+                const prompt = `당신은 재개발 조합 이사 선거 캠프의 핵심 카피라이터입니다.
+우리의 선거 프레임은 '실력파 원팀(우리) vs 무능한 불신임팀(상대)'입니다.
+우리의 핵심 투표 기호는 '4, 5, 6, 7, 8번(이사) 그리고 성시찬(감사)'으로 모두 찍어달라는 연쇄 투표 전략입니다.
+대상 유권자 성향 또는 우려사항: "${targetAudience}"
+
+이 유권자에게 보낼 카카오톡 또는 SMS 홍보 메시지(300자 이내)를 작성해주세요. 
+조건:
+1. 대상자의 우려에 공감하는 따뜻한 인사말로 시작할 것.
+2. '전문가가 검증해야 공사가 지연되지 않고 빠르다'는 논리를 포함할 것.
+3. 이사는 4,5,6,7,8번, 감사는 성시찬을 꼭 뽑아달라는 내용을 명확히 넣을 것.
+4. 이모티콘을 적절히 사용하여 모바일에서 읽기 좋게 작성할 것.`;
+
+                const resultText = await fetchGeminiWithRetry(prompt);
+                
+                // Update UI
+                prResultText.textContent = resultText;
+                prResultContainer.classList.remove('hidden');
+                btnGeneratePR.innerHTML = originalBtnText;
+                btnGeneratePR.disabled = false;
+            });
+
+            // --- Gemini API Interactivity: Q&A Response Generator ---
+            const btnGenerateQA = document.getElementById('btn-generate-qa');
+            const qaQuestionInput = document.getElementById('qa-question-input');
+            const qaResultContainer = document.getElementById('qa-result-container');
+            const qaResultText = document.getElementById('qa-result-text');
+
+            btnGenerateQA.addEventListener('click', async () => {
+                const question = qaQuestionInput.value.trim() || "비대위가 들어가면 사업이 늦어지는 것 아닙니까?";
+                
+                // Set loading state
+                const originalBtnText = btnGenerateQA.innerHTML;
+                btnGenerateQA.innerHTML = '<span class="loader border-t-emerald-500"></span> 분석 중...';
+                btnGenerateQA.disabled = true;
+                qaResultContainer.classList.add('hidden');
+
+                const prompt = `당신은 재개발 조합 이사 선거 캠프의 든든하고 논리적인 대변인입니다.
+상대측 지지자나 우려를 가진 조합원이 다음과 같은 날선 질문/공격을 해왔습니다:
+조합원의 질문/우려: "${question}"
+
+우리의 선거 프레임: "무능한 거수기 이사회가 위법을 저질러 결국 공사 중단을 부른다. 현장 실무 경험이 있는 전문가들(4,5,6,7,8번 후보)로 구성된 건강한 이사회가 철저히 검증해야 오히려 공사 지연을 막고 속도를 낼 수 있다."
+
+이 질문에 대해 조합원을 안심시키고 논리적으로 반박할 수 있는 구두 답변 스크립트(250자 이내)를 작성해주세요.
+조건:
+1. 상대방의 걱정을 먼저 부드럽게 인정/공감할 것 ("조합원님, 당연히 그런 걱정 하실 수 있습니다.")
+2. 감정적인 비난을 배제하고 철저히 '속도와 안정성, 그리고 전문성' 논리로 방어할 것.
+3. 구어체(말하는 투)로 자연스럽고 정중하게 작성할 것.`;
+
+                const resultText = await fetchGeminiWithRetry(prompt);
+                
+                // Update UI
+                qaResultText.textContent = resultText;
+                qaResultContainer.classList.remove('hidden');
+                btnGenerateQA.innerHTML = originalBtnText;
+                btnGenerateQA.disabled = false;
+            });
+
+            // --- Chart.js Implementations (unchanged logic) ---
+            const radarCtx = document.getElementById('radarChart').getContext('2d');
+            new Chart(radarCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['현장 실무 경험', '투명성 (이익우선)', '추진 속도', '도덕성 (신뢰)', '소통 의지'],
+                    datasets: [
+                        {
+                            label: '실력파 원팀',
+                            data: [95, 100, 90, 95, 100],
+                            backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                            borderColor: '#10b981',
+                            pointBackgroundColor: '#10b981',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: '#10b981',
+                            borderWidth: 2
+                        },
+                        {
+                            label: '기존 집행부',
+                            data: [40, 20, 50, 15, 30],
+                            backgroundColor: 'rgba(244, 63, 94, 0.2)',
+                            borderColor: '#f43f5e',
+                            pointBackgroundColor: '#f43f5e',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: '#f43f5e',
+                            borderWidth: 2
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { color: 'rgba(0,0,0,0.1)' },
+                            grid: { color: 'rgba(0,0,0,0.1)' },
+                            pointLabels: {
+                                font: { family: "'Noto Sans KR', sans-serif", size: 12, weight: 'bold' },
+                                color: '#475569'
+                            },
+                            ticks: { display: false, min: 0, max: 100 }
+                        }
+                    },
+                    plugins: {
+                        legend: { position: 'bottom', labels: { font: { family: "'Noto Sans KR', sans-serif" } } }
+                    }
+                }
+            });
+
+            const pieCtx = document.getElementById('pieChart').getContext('2d');
+            new Chart(pieCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['기존 집행부 장악', '우리측 견제'],
+                    datasets: [{
+                        data: [99, 1],
+                        backgroundColor: ['#f43f5e', '#3b82f6'],
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: { display: false }
+                    }
+                },
+                plugins: [{
+                    id: 'textCenter',
+                    beforeDraw: function(chart) {
+                        var width = chart.width,
+                            height = chart.height,
+                            ctx = chart.ctx;
+                        ctx.restore();
+                        var fontSize = (height / 80).toFixed(2);
+                        ctx.font = "bold " + fontSize + "em 'Noto Sans KR'";
+                        ctx.textBaseline = "middle";
+                        ctx.fillStyle = "#ffffff";
+                        var text = "99%",
+                            textX = Math.round((width - ctx.measureText(text).width) / 2),
+                            textY = height / 2;
+                        ctx.fillText(text, textX, textY);
+                        ctx.save();
+                    }
+                }]
+            });
+        });
+    </script>
+</body>
+</html>
